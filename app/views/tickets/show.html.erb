@@ -1,0 +1,12 @@
+<p>
+  <strong>Title:</strong>
+  <%= @ticket.title %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @ticket.text %>
+</p>
+
+<%= link_to 'Back', tickets_path %>
+| <%= link_to 'Edit', edit_ticket_path(@ticket) %>

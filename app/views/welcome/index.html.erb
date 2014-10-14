@@ -1,0 +1,12 @@
+<h1>Welcome to SiGeCo 2</h1>
+<h5>The Open Source Competencies Matrix Management System</h5>
+
+<p>
+
+<!-- manage matrix, manage teams, manage profile, later add tickets -->
+  <% if user_signed_in? %>
+    <%= link_to 'Fill Your Profile Matrices', fill_matrices_path, :class => 'link' %> |
+    <%= link_to 'Manage Matrices', competencies_matrices_path, :class => 'link' %> |
+    <%= link_to 'Manage Teams', teams_path, :class => 'link' %>
+  <% end %>
+</p>

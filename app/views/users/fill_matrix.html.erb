@@ -1,0 +1,36 @@
+<%= form_for @filled_matrix do |f| %>
+  <h1><%= @filled_matrix.name %></h1>
+  <h4><%= @filled_matrix.description %></h4>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :short_description %>
+  <%= f.hidden_field :description %>
+  <%= f.hidden_field :skills %>
+  <%= f.hidden_field :knowledge_areas %>
+  <p></p>
+  <table class="table">
+    <tr>
+      <th colspan="1"></th>
+      <% @sorted_skills.each do |skill| %>
+        <th><%= skill.name %></th>
+      <% end %>
+    </tr>
+    <% @filled_matrix.knowledge_areas.each do |area| %>
+      <tr>
+        <td><%= area.name %></td>
+        <% @sorted_skills.each do |skill| %>
+          <% value = @values.detect { |value| (value.skill == skill && value.knowledge_area == area) } %>
+          <% value = value.nil? ? Value.new : value %>
+          <% f.fields_for :values do |v| %>
+            <%= v.hidden_field :knowledge_area, :value => area %>
+            <%= v.hidden_field :skill, :value => skill %>
+            <%= v.hidden_field :competencies_matrix , :value => @filled_matrix %>
+            <td><%= v.collection_select :value, @filled_matrix.values_sets, :id, :name, :selected => value.values_set.id %></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <p><%= f.submit 'Update Table', url: put_matrix_path(@filled_matrix) %></p>
+<% end %>
+
+<%= link_to 'Back', fill_matrices_path %>

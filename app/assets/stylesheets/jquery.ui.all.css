@@ -1,0 +1,7 @@
+/*
+*= require jquery-ui
+*/
+/*Keeps bootstrap style*/
+.ui-widget-content a {
+  color: #0088CC;
+}
