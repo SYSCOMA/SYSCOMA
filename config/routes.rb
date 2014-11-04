@@ -1,30 +1,12 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  resources :tickets
-  resources :teams
-  resources :competencies_matrices do
-    delete '/values/:id' => 'values_sets#destroy', as: :value
-    post '/values' => 'values_sets#create', as: :values
-    delete '/knowledge_areas/:id' => 'knowledge_areas#destroy', as: :knowledge_area
-    post '/knowledge_areas' => 'knowledge_areas#create', as: :knowledge_areas
-    delete '/skills/:id' => 'skills#destroy', as: :skill
-    post '/skills' => 'skills#create', as: :skills
-  end
-
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-
-  get '/fill_matrices' => 'users#fill_matrices', as: :fill_matrices
-  get '/fill_matrices/:id' => 'users#fill_matrix', as: :fill_matrix
-  put '/fill_matrices/:id' => 'users#fill_matrix', as: :put_matrix
-  patch '/fill_matrices/:id' => 'users#fill_matrix', as: :patch_matrix
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

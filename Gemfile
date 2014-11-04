@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.7'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 4.0.3'
+gem 'sass-rails', '>= 4.0.4'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 2.5.3'
@@ -28,10 +28,10 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '>= 2.2.2'
+gem 'jbuilder', '>= 2.2.4'
 
 # For user authentication and everything else
-gem 'devise', '~> 3.4.0'
+gem 'devise', '~> 3.4.1'
 
 # PostgreSQL integration
 gem "pg", "~> 0.17.1"
@@ -40,7 +40,7 @@ gem "pg", "~> 0.17.1"
 gem "twitter-bootstrap-rails", "~> 3.2.0"
 
 # JQueryUI
-gem 'jquery-ui-rails', '~> 5.0.1'
+gem 'jquery-ui-rails', '~> 5.0.2'
 
 # InPlace editing
 gem 'rest_in_place'
@@ -67,16 +67,16 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.1.0'
 
   # Fixtures made easy
-  gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'factory_girl_rails', '~> 4.5.0'
 
   # JavaScript unit tests
-  gem "konacha", "~> 3.2.5"
+  gem "konacha", "~> 3.3.0"
   
   #deployment
   gem 'capistrano', "~>3.2.1", require: false
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
-  gem 'capistrano-rvm', "~>0.1.1"
+  gem 'capistrano-rvm', "~>0.1.2"
   
   # Test coverage history
   gem 'coveralls', require: false
