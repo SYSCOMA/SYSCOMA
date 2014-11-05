@@ -30,6 +30,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '>= 2.2.4'
 
+# Host CommonJS JavaScript environments in Ruby
+#gem 'commonjs', '0.2.7'
+
 # For user authentication and everything else
 gem 'devise', '~> 3.4.1'
 
@@ -37,7 +40,8 @@ gem 'devise', '~> 3.4.1'
 gem "pg", "~> 0.17.1"
 
 # Twitter Bootstrap for layout
-gem "twitter-bootstrap-rails", "~> 3.2.0"
+#gem "less-rails"
+gem "twitter-bootstrap-rails"
 
 # JQueryUI
 gem 'jquery-ui-rails', '~> 5.0.2'

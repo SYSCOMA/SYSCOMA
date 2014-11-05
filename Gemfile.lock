@@ -282,5 +282,5 @@ DEPENDENCIES
   sqlite3
   therubyracer
   turbolinks
-  twitter-bootstrap-rails (~> 3.2.0)
+  twitter-bootstrap-rails
   uglifier (>= 2.5.3)

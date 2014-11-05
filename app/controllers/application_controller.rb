@@ -13,8 +13,9 @@ class ApplicationController < ActionController::Base
   # Since creating the controllers looks wronger than not testing this two
   # lines. I think we can live without 100% of coverage
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :name
-    devise_parameter_sanitizer.for(:account_update) << :name
+    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:username, :email) }
+    devise_parameter_sanitizer.for(:sign_up) << :name << :username
+    devise_parameter_sanitizer.for(:account_update) << :name << :username
   end
 
 end
