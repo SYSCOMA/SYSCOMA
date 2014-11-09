@@ -73,6 +73,9 @@ group :development, :test do
   # Fixtures made easy
   gem 'factory_girl_rails', '~> 4.5.0'
 
+  # Clean test database
+  gem 'database_cleaner'
+
   # JavaScript unit tests
   gem "konacha", "~> 3.3.0"
   
@@ -94,7 +97,6 @@ end
 group :cucumber do
   gem 'cucumber', '~> 1.3.17'
   gem 'cucumber-rails'
-  gem 'database_cleaner'
   gem 'poltergeist', '~> 1.5.1'
 end
 

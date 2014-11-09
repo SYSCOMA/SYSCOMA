@@ -1,5 +1,9 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe "welcome/index.html.erb" do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe "welcome/index", :type => :view do
+  it "should render page" do
+    #assign(:welcome)
+    render
+    expect(rendered).to match("Welcome to SYSCOMA")
+  end
 end
