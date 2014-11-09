@@ -78,8 +78,11 @@
             <% if user_signed_in? %>
               <h3><%= current_user.name %></h3>
               <ul class="nav nav-list">
-                <li class="nav-header">Sidebar</li>
-                <li><%= link_to "Link1", "/path1"  %></li>
+                <li class="nav-header">Competence Matrices</li>
+                <% if current_user.admin? %>
+                  <li><%= link_to "See definitions", competence_matrices_path  %></li>
+                  <li><%= link_to "New definition", new_competence_matrix_path  %></li>
+                <% end %>
                 <li><%= link_to "Link2", "/path2"  %></li>
                 <li><%= link_to "Link3", "/path3"  %></li>
               </ul>

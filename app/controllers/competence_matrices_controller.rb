@@ -3,16 +3,13 @@ class CompetenceMatricesController < ApplicationController
 
   def index
     @competence_matrices = CompetenceMatrix.all
-    respond_with(@competence_matrices)
   end
 
   def show
-    respond_with(@competence_matrix)
   end
 
   def new
     @competence_matrix = CompetenceMatrix.new
-    respond_with(@competence_matrix)
   end
 
   def edit
@@ -21,17 +18,16 @@ class CompetenceMatricesController < ApplicationController
   def create
     @competence_matrix = CompetenceMatrix.new(competence_matrix_params)
     @competence_matrix.save
-    respond_with(@competence_matrix)
+    redirect_to competence_matrices_path
   end
 
   def update
     @competence_matrix.update(competence_matrix_params)
-    respond_with(@competence_matrix)
   end
 
   def destroy
     @competence_matrix.destroy
-    respond_with(@competence_matrix)
+    redirect_to competence_matrices_path
   end
 
   private

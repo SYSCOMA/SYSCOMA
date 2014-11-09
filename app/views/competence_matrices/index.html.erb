@@ -5,18 +5,14 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @competence_matrices.each do |competence_matrix| %>
       <tr>
-        <td><%= link_to competence_matrix.id, competence_matrix_path(competence_matrix) %></td>
-        <td><%= competence_matrix.name %></td>
-        <td><%=l competence_matrix.created_at %></td>
+        <td><%= link_to competence_matrix.name, competence_matrix_path(competence_matrix) %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_competence_matrix_path(competence_matrix), :class => 'btn btn-default btn-xs' %>
