@@ -1,5 +1,6 @@
 class CompetenceMatricesController < ApplicationController
   before_action :set_competence_matrix, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @competence_matrices = CompetenceMatrix.all
