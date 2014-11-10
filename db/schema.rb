@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109212047) do
+ActiveRecord::Schema.define(version: 20141110191544) do
+
+  create_table "abilities", force: true do |t|
+    t.string   "name"
+    t.integer  "competence_matrix_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "competence_matrices", force: true do |t|
     t.string   "name"
