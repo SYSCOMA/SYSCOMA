@@ -24,17 +24,17 @@ RSpec.describe CompetenceMatricesController, :type => :controller do
   # CompetenceMatrix. As you add validations to CompetenceMatrix, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { name: "AName of Matrix" }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: "" }
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CompetenceMatricesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { sign_in ( FactoryGirl.create(:admin)) }
 
   describe "GET index" do
     it "assigns all competence_matrices as @competence_matrices" do
@@ -103,15 +103,8 @@ RSpec.describe CompetenceMatricesController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: 'A New Matrix' }
       }
-
-      it "updates the requested competence_matrix" do
-        competence_matrix = CompetenceMatrix.create! valid_attributes
-        put :update, {:id => competence_matrix.to_param, :competence_matrix => new_attributes}, valid_session
-        competence_matrix.reload
-        skip("Add assertions for updated state")
-      end
 
       it "assigns the requested competence_matrix as @competence_matrix" do
         competence_matrix = CompetenceMatrix.create! valid_attributes

@@ -2,9 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "competence_matrices/edit", :type => :view do
   before(:each) do
-    @competence_matrix = assign(:competence_matrix, CompetenceMatrix.create!(
-      :name => "MyString"
-    ))
+    @competence_matrix = assign(:competence_matrix, FactoryGirl.create(:competence_matrix))
   end
 
   it "renders the edit competence_matrix form" do

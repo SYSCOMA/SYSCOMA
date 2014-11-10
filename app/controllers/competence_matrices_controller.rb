@@ -19,12 +19,19 @@ class CompetenceMatricesController < ApplicationController
 
   def create
     @competence_matrix = CompetenceMatrix.new(competence_matrix_params)
-    @competence_matrix.save
-    redirect_to competence_matrices_path
+    if @competence_matrix.save
+      redirect_to competence_matrix_path(@competence_matrix)
+    else 
+      render "new"
+    end
   end
 
   def update
-    @competence_matrix.update(competence_matrix_params)
+    if @competence_matrix.update(competence_matrix_params)
+      redirect_to competence_matrix_path(@competence_matrix)
+    else
+      render "edit"
+    end
   end
 
   def destroy
