@@ -42,11 +42,36 @@
         </tr>
       <% end %>
       <tr>
-        <td colspan="2"><button add-ability="true" type='button' onclick="addAbility()" class='btn btn-primary'>Add Ability</button></td>
+        <td colspan="2"><button add-ability="true" type='button' class='btn btn-primary'>Add ability</button></td>
       </tr>
     </tbody>
   </table>
   <%= error_span(@competence_matrix[:abilities]) %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= KnowledgeArea.model_name.human.pluralize %></th>
+        <th><%= t '.destroy', :default => t("helpers.links.destroy") %></th>
+      </tr>
+    </thead>
+    <tbody id="knowledge-areas">
+      <%= f.fields_for :knowledge_areas do |ff| %>
+        <tr>
+          <td>
+            <div class="controls"><%= ff.text_field :name, :class => 'form-control' %></div>
+          </td>
+          <td>
+            <div class="controls"><%= ff.check_box :_destroy%></div>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="2"><button add-knowledge-area="true" type='button' class='btn btn-primary'>Add knowledge area</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= error_span(@competence_matrix[:knowledge_areas]) %>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

@@ -11,3 +11,13 @@ $ ->
     alert("asdadda2")
     document.getElementById("abilities").load()
     alert("asdadda3")
+
+  $("button[add-knowledge-area]").click (e) ->
+    e.preventDefault()
+ 
+    alert("asdadda")
+    document.getElementById("empty-spaces-loader").html("<% @competence_matrix.knowledge_areas.build %>")
+    alert("asdadda2")
+    document.getElementById("knowledge-areas").load()
+    alert("asdadda3")
+
