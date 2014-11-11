@@ -12,9 +12,11 @@ class CompetenceMatricesController < ApplicationController
 
   def new
     @competence_matrix = CompetenceMatrix.new
+    @competence_matrix.abilities.build
   end
 
   def edit
+    @competence_matrix.abilities.build
   end
 
   def create
@@ -45,7 +47,7 @@ class CompetenceMatricesController < ApplicationController
     end
 
     def competence_matrix_params
-      params.require(:competence_matrix).permit(:name)
+      params.require(:competence_matrix).permit(:name, abilities_attributes: [:id, :name, :_destroy])
     end
     
     def authenticate_admin_user

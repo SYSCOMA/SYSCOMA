@@ -8,6 +8,21 @@
   <dd><%= @competence_matrix.name %></dd>
 </dl>
 
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= Ability.model_name.human.pluralize.titleize %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @competence_matrix.abilities.each do |ability| %>
+      <tr>
+        <td><%= ability.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to t('.back', :default => t("helpers.links.back")),
               competence_matrices_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),

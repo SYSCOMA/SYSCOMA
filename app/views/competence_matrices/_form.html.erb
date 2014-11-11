@@ -22,10 +22,33 @@
     </div>
     <%= error_span(@competence_matrix[:name]) %>
   </div>
-
+  <div id='empty-spaces-loader'></div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= Ability.model_name.human.pluralize %></th>
+        <th><%= t '.destroy', :default => t("helpers.links.destroy") %></th>
+      </tr>
+    </thead>
+    <tbody id="abilities">
+      <%= f.fields_for :abilities do |ff| %>
+        <tr>
+          <td>
+            <div class="controls"><%= ff.text_field :name, :class => 'form-control' %></div>
+          </td>
+          <td>
+            <div class="controls"><%= ff.check_box :_destroy%></div>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="2"><button add-ability="true" type='button' onclick="addAbility()" class='btn btn-primary'>Add Ability</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= error_span(@competence_matrix[:abilities]) %>
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             competence_matrices_path, :class => 'btn btn-default' %>
-
 <% end %>
