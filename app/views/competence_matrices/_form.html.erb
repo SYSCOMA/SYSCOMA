@@ -73,6 +73,38 @@
   </table>
   <%= error_span(@competence_matrix[:knowledge_areas]) %>
 
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th colspan="3"><%= Value.model_name.human.pluralize %></th>        
+      </tr>
+      <tr>
+        <th>Value</th>
+        <th>Rank</th>
+        <th><%= t '.destroy', :default => t("helpers.links.destroy") %></th>
+      </tr>
+    </thead>
+    <tbody id="values">
+      <%= f.fields_for :values do |ff| %>
+        <tr>
+          <td>
+            <div class="controls"><%= ff.text_field :value, :class => 'form-control' %></div>
+          </td>
+          <td>
+            <div class="controls"><%= ff.text_field :rank, :class => 'form-control' %></div>
+          </td>
+          <td>
+            <div class="controls"><%= ff.check_box :_destroy%></div>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="2"><button add-value="true" type='button' class='btn btn-primary'>Add value</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= error_span(@competence_matrix[:values]) %>
+
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             competence_matrices_path, :class => 'btn btn-default' %>

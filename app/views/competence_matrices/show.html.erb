@@ -11,13 +11,15 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= Ability.model_name.human.pluralize.titleize %></th>
+      <th colspan="2"><%= Ability.model_name.human.pluralize.titleize %></th>
     </tr>
   </thead>
   <tbody>
     <% @competence_matrix.abilities.each do |ability| %>
       <tr>
         <td><%= ability.name %></td>
+        <td><%= link_to t('.edit', :default => "Edit values"),
+                      edit_competence_matrix_ability_path(@competence_matrix, ability), :class => 'btn btn-default btn-xs' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,6 +35,26 @@
     <% @competence_matrix.knowledge_areas.each do |knowledge_area| %>
       <tr>
         <td><%= knowledge_area.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="2"><%= Value.model_name.human.pluralize.titleize %></th>
+    </tr>
+    <tr>
+      <th><%= Value.model_name.human.titleize %></th>
+      <th>Rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @competence_matrix.values.each do |value| %>
+      <tr>
+        <td><%= value.value %></td>
+        <td><%= value.rank %></td>
       </tr>
     <% end %>
   </tbody>

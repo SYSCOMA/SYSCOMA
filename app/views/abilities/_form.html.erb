@@ -1,0 +1,65 @@
+<%= form_for @ability, url: competence_matrix_ability_path(@ability.competence_matrix, @ability), html: { class: "form-horizontal ability" } do |f| %>
+
+    <% if @ability.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@ability.errors.count, "error") %> prohibited this ability from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @ability.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.hidden_field :name, :class => 'form-control' %>
+      <%= @ability.name %>
+    </div>
+    <%= error_span(@ability[:name]) %>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th colspan="3"><%= Value.model_name.human.pluralize %></th>        
+      </tr>
+      <tr>
+        <th>Value</th>
+        <th>Rank</th>
+        <th><%= t '.destroy', :default => t("helpers.links.destroy") %></th>
+      </tr>
+    </thead>
+    <tbody id="values">
+      <%= f.fields_for :values do |ff| %>
+        <tr>
+          <td>
+            <div class="controls"><%= ff.text_field :value, :class => 'form-control' %></div>
+          </td>
+          <td>
+            <div class="controls"><%= ff.text_field :rank, :class => 'form-control' %></div>
+          </td>
+          <td>
+            <div class="controls"><%= ff.check_box :_destroy%></div>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="2"><button add-value="true" type='button' class='btn btn-primary'>Add value</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= error_span(@ability[:values]) %>
+
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            competence_matrix_path(@ability.competence_matrix), :class => 'btn btn-default' %>
+
+<% end %>

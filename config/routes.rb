@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :competence_matrices
+  resources :competence_matrices do
+    resources :abilities, only: [:edit, :update]
+  end
 
   devise_for :users
   get 'welcome/index'

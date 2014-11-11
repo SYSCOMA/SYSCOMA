@@ -5,19 +5,18 @@
 $ ->
   $("button[add-ability]").click (e) ->
     e.preventDefault()
- 
-    alert("asdadda")
+
     document.getElementById("empty-spaces-loader").html("<% @competence_matrix.abilities.build %>")
-    alert("asdadda2")
     document.getElementById("abilities").load()
-    alert("asdadda3")
 
   $("button[add-knowledge-area]").click (e) ->
     e.preventDefault()
- 
-    alert("asdadda")
-    document.getElementById("empty-spaces-loader").html("<% @competence_matrix.knowledge_areas.build %>")
-    alert("asdadda2")
-    document.getElementById("knowledge-areas").load()
-    alert("asdadda3")
 
+    document.getElementById("empty-spaces-loader").html("<% @competence_matrix.knowledge_areas.build %>")
+    document.getElementById("knowledge-areas").load()
+
+  $("button[add-value]").click (e) ->
+    e.preventDefault()
+
+    document.getElementById("empty-spaces-loader").html("<% @competence_matrix.values.build %>")
+    document.getElementById("values").load()
