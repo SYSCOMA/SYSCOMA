@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
+  before_action :set_managed_groups
+
   protected
 
   # We don't have how too test this unless we have the Devise controllers.
@@ -15,6 +17,12 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
     devise_parameter_sanitizer.for(:account_update) << :name
+  end
+
+  def set_managed_groups
+    if user_signed_in?
+      @managed_groups = current_user.managed_groups
+    end
   end
 
 end

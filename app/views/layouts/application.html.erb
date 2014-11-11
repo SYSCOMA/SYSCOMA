@@ -75,25 +75,36 @@
       <div class="row">
         <div class="col-lg-3">
           <div class="well sidebar-nav">
-            <% if user_signed_in? %>
-              <h3><%= current_user.name %></h3>
-              <ul class="nav nav-list">
-                
+            <ul class="nav nav-list">
+              <% if user_signed_in? %>
+                <h3><%= current_user.name %></h3>
+                <li class="nav-header"><%= link_to "Search", competence_matrices_path  %></li>
                 <% if current_user.admin? %>
                   <li class="nav-header">Competence Matrices</li>
                   <li><%= link_to "See definitions", competence_matrices_path  %></li>
                   <li><%= link_to "New definition", new_competence_matrix_path  %></li>
+                  <li class="nav-header">Employee</li>
+                  <li><%= link_to "Manage employees", competence_matrices_path  %></li>
+                  <li><%= link_to "Add employees", new_competence_matrix_path  %></li>
+                  <li class="nav-header">Groups</li>
+                  <li><%= link_to "Manage groups", competence_matrices_path  %></li>
                 <% end %>
-                <li class="nav-header">Others</li>
-                <li><%= link_to "Link2", "/path2"  %></li>
-                <li><%= link_to "Link3", "/path3"  %></li>
-              </ul>
-            <% else %>
-              <ul class="nav nav-list">
+                <% if @managed_groups.any? %>
+                  <% if !current_user.admin? %>
+                    <li class="nav-header">Groups</li>
+                  <% end %>
+                  <% @managed_groups.each do |group| %>
+                    <li><%= link_to group.name, competence_matrices_path  %></li>
+                  <% end %>
+                <% end %>
+                <li class="nav-header">Profile</li>
+                <li><%= link_to "See profile", competence_matrices_path  %></li>
+                <li><%= link_to "Fill matrices", new_competence_matrix_path  %></li>
+              <% else %>
                 <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
                 <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
-              </ul>
-            <% end %>
+              <% end %>
+            </ul>
           </div><!--/.well -->
         </div><!--/span-->
         <div class="col-lg-9">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141111141439) do
+ActiveRecord::Schema.define(version: 20141111221757) do
 
   create_table "abilities", force: true do |t|
     t.string   "name"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20141111141439) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.integer  "subgroup_of_id"
+    t.integer  "manager_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "groups", ["manager_id"], name: "index_groups_on_manager_id"
+  add_index "groups", ["subgroup_of_id"], name: "index_groups_on_subgroup_of_id"
 
   create_table "knowledge_areas", force: true do |t|
     t.string   "name"
@@ -50,9 +61,11 @@ ActiveRecord::Schema.define(version: 20141111141439) do
     t.datetime "updated_at"
     t.string   "name"
     t.boolean  "admin"
+    t.integer  "group_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["group_id"], name: "index_users_on_group_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "values", force: true do |t|
