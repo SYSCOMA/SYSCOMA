@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112221437) do
+ActiveRecord::Schema.define(version: 20141112234555) do
 
   create_table "abilities", force: true do |t|
     t.string   "name"
@@ -26,7 +26,23 @@ ActiveRecord::Schema.define(version: 20141112221437) do
     t.datetime "updated_at"
   end
 
-  create_table "criterions", force: true do |t|
+  create_table "competences", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "knowledge_area_id"
+    t.integer  "ability_id"
+    t.integer  "value_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "criterion_id"
+  end
+
+  add_index "competences", ["ability_id"], name: "index_competences_on_ability_id"
+  add_index "competences", ["criterion_id"], name: "index_competences_on_criterion_id"
+  add_index "competences", ["knowledge_area_id"], name: "index_competences_on_knowledge_area_id"
+  add_index "competences", ["user_id"], name: "index_competences_on_user_id"
+  add_index "competences", ["value_id"], name: "index_competences_on_value_id"
+
+  create_table "criteria", force: true do |t|
     t.integer  "search_criteria_id"
     t.string   "comparative"
     t.integer  "position"
@@ -34,7 +50,7 @@ ActiveRecord::Schema.define(version: 20141112221437) do
     t.datetime "updated_at"
   end
 
-  add_index "criterions", ["search_criteria_id"], name: "index_criterions_on_search_criteria_id"
+  add_index "criteria", ["search_criteria_id"], name: "index_criteria_on_search_criteria_id"
 
   create_table "groups", force: true do |t|
     t.string   "name"

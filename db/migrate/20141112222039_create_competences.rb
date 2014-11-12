@@ -1,7 +1,6 @@
 class CreateCompetences < ActiveRecord::Migration
   def change
     create_table :competences do |t|
-      t.references :criterion, index: true
       t.references :user, index: true
       t.references :knowledge_area, index: true
       t.references :ability, index: true
