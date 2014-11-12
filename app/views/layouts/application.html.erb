@@ -87,19 +87,19 @@
                   <li><%= link_to "Manage employees", competence_matrices_path  %></li>
                   <li><%= link_to "Add employees", new_competence_matrix_path  %></li>
                   <li class="nav-header">Groups</li>
-                  <li><%= link_to "Manage groups", competence_matrices_path  %></li>
+                  <li><%= link_to "Manage groups", groups_path  %></li>
                 <% end %>
                 <% if @managed_groups.any? %>
                   <% if !current_user.admin? %>
                     <li class="nav-header">Groups</li>
                   <% end %>
                   <% @managed_groups.each do |group| %>
-                    <li><%= link_to group.name, competence_matrices_path  %></li>
+                    <li><%= link_to group.name, group_path(group)  %></li>
                   <% end %>
                 <% end %>
                 <li class="nav-header">Profile</li>
                 <li><%= link_to "See profile", competence_matrices_path  %></li>
-                <li><%= link_to "Fill matrices", new_competence_matrix_path  %></li>
+                <li><%= link_to "Fill competences", new_competence_matrix_path  %></li>
               <% else %>
                 <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
                 <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>

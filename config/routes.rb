@@ -4,6 +4,16 @@ Rails.application.routes.draw do
     resources :abilities, only: [:edit, :update]
   end
 
+  resources :groups do
+    get 'subgroup' => 'groups#new'
+    get 'employee' => 'groups#search_employee'
+    delete 'employee/:id' => 'groups#remove_employee'
+    post 'employee/:id' => 'groups#add_employee'
+    get 'manager' => 'groups#search_manager'
+    delete 'manager' => 'groups#remove_manager'
+    post 'manager/:id' => 'groups#add_manager'
+  end
+
   devise_for :users
   get 'welcome/index'
 

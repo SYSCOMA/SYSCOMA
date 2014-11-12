@@ -1,0 +1,24 @@
+<div class="page-header">
+  <h1><%=t '.title', :default => "Add new #{action} to #{@group.name} group" %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= action.titleize %> - Results for "<%= @keyword %>"</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, { controller: "groups", action: "add_#{action}", group_id: @group.id, id: user.id }, data: { method: :post } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for :user, :url => { controller: "groups",
+    action: "search_#{action}", group_id: @group.id } do |f| %>
+          <%= f.text_field :name %>
+          <%= f.submit "New search", :class => 'btn btn-primary' %>
+<% end %>
