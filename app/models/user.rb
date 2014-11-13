@@ -10,12 +10,6 @@ class User < ActiveRecord::Base
   has_many :managed_groups, class_name: "Group", foreign_key: "manager_id"
 
   def manager? group
-    if self ==  group.manager
-      true
-    elsif group.subgroup_of.present?
-      manager? group
-    else
-      false
-    end
+    self ==  group.manager || (group.subgroup_of.present? && manager?(group.subgroup_of))
   end
 end
