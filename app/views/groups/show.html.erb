@@ -52,13 +52,13 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="2">Emplyees</th>
+      <th colspan="2">Employees</th>
     </tr>
   </thead>
   <tbody>
     <% @group.users.each do |user| %>
       <tr>
-        <td><%= user.name %></td>
+        <td><%= link_to user.name, user_path(user) %></td>
         <td><%= link_to t('.destroy', :default => "Remove"), { controller: "groups", action: "remove_employee", group_id: @group.id, id: user.id }, class: 'btn btn-default btn-xs', data: { method: :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %></td>
       </tr>
     <% end %>

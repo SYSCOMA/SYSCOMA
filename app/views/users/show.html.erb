@@ -1,0 +1,40 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => "Employee" %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @user.name %></dd>
+</dl>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @user.email %></dd>
+</dl>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="2"><%= CompetenceMatrix.model_name.human.pluralize.titleize %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @competence_matrices.each do |competence_matrix| %>
+      <tr>
+        <td><%= link_to competence_matrix.name,
+                      user_matrix_path(@user, competence_matrix) %></td>
+        <td>
+          <% if editor? @user %>
+            <%= link_to "Edit", competences_edit_knowledge_area_path(@user, competence_matrix), :class => 'btn btn-default btn-xs' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if editor? @user %>
+  <%= link_to t('.fill_matrices',
+      :default => [t("helpers.links.fill_matrices"), "Fill matrices"]),
+      competences_edit_matrix_path(@user), :class => 'btn btn-default'  %>
+<% end %>

@@ -98,7 +98,7 @@
                   <% end %>
                 <% end %>
                 <li class="nav-header">Profile</li>
-                <li><%= link_to "See profile", competence_matrices_path  %></li>
+                <li><%= link_to "See profile", user_path(current_user)  %></li>
                 <li><%= link_to "Fill competences", competences_edit_matrix_path(current_user)  %></li>
               <% else %>
                 <li><%= link_to "Sign up", new_user_registration_path, class: 'navbar-link'  %></li>

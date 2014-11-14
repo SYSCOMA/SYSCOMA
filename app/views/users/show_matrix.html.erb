@@ -1,0 +1,52 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => "Employee" %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @user.name %></dd>
+</dl>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @user.email %></dd>
+</dl>
+
+<table class="table table-striped">
+  <caption><%= @competence_matrix.name %></caption>
+  <thead>
+    <tr>
+      <th></th>
+      <% @abilities.each do |ability| %>
+        <th scope="col"><%= ability.name %></th>
+      <% end %>
+      <% if editor? @user %>
+        <th scope="col"></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @knowledge_areas.each do |knowledge_area| %>
+      <tr>
+        <td scope="row"><strong><%= knowledge_area.name %></strong></td>
+        <% values_for_knowledge_area(knowledge_area, @competences, @abilities).each do |value| %>
+          <td><%= value %></td>
+        <% end %>
+        <td>
+          <% if editor? @user %>
+            <%= link_to "Edit", competences_edit_path(@user, @competence_matrix, knowledge_area), :class => 'btn btn-default btn-xs' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if editor? @user %>
+  <%= link_to t('.fill_matrix',
+      :default => [t("helpers.links.fill_matrix"), "Fill matrix"]),
+      competences_edit_knowledge_area_path(@user, @competence_matrix),
+      :class => 'btn btn-default'  %>
+<% end %>
+<%= link_to t('.back', :default => t("helpers.links.back")), user_path(@user),
+    :class => 'btn btn-default'  %>

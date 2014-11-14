@@ -25,6 +25,11 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+  
+  get 'users/:id', to: 'users#show', as: 'user'
+  get 'users/:id/matrix/:matrix_id', to: 'users#show_matrix', as: 'user_matrix'
+
+
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -60,7 +60,8 @@ class CompetencesController < ApplicationController
     end
 
     def save_competence params
-      if params[:id].empty? && params[:value_id] != nil
+      if params[:id].empty? && params[:value_id] != nil &&
+          params[:value_id] != 0 && params[:value_id] != ""
         params = params.permit(:knowledge_area_id, :ability_id, :user_id, :value_id)
         competence = Competence.new(params)
         competence.save
