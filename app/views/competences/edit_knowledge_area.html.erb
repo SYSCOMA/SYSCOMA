@@ -1,0 +1,27 @@
+<%- model_class = Competence -%>
+<div class="page-header">
+  <h1><%=t '.title', default: [:'helpers.titles.edit', 'Fill Competences'], model: model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= CompetenceMatrix.model_name.human.titleize %>:</strong></dt>
+  <dd><%= @competence_matrix.name %></dd>
+</dl>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Choose a <%= KnowledgeArea.model_name.human %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @knowledge_areas.each do |knowledge_area| %>
+      <tr>
+        <td><%= link_to knowledge_area.name, competences_edit_path(@user, @competence_matrix, 
+            knowledge_area) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+            competences_edit_matrix_path(@user), :class => 'btn btn-default' %>

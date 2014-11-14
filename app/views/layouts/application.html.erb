@@ -21,23 +21,23 @@
     
     <!-- For third-generation iPad with high-resolution Retina display: -->
     <!-- Size should be 144 x 144 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', rel: 'apple-touch-icon-precomposed', type: 'image/png', sizes: '144x144' %>
 
     <!-- For iPhone with high-resolution Retina display: -->
     <!-- Size should be 114 x 114 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', rel: 'apple-touch-icon-precomposed', type: 'image/png', sizes: '114x114' %>
 
     <!-- For first- and second-generation iPad: -->
     <!-- Size should be 72 x 72 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', rel: 'apple-touch-icon-precomposed', type: 'image/png', sizes: '72x72' %>
 
     <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
     <!-- Size should be 57 x 57 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', rel: 'apple-touch-icon-precomposed', type: 'image/png' %>
 
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+    <%= favicon_link_tag 'favicon.ico', rel: 'shortcut icon' %>
 
   </head>
 
@@ -55,11 +55,11 @@
           <ul class="nav navbar-nav pull-right">
             <% if user_signed_in? %>
               Logged in as <strong><%= current_user.email %></strong>.
-              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+              <%= link_to 'Edit profile', edit_user_registration_path, class: 'navbar-link' %> |
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-link'  %>
             <% else %>
-              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+              <%= link_to "Sign up", new_user_registration_path, class: 'navbar-link'  %> |
+              <%= link_to "Login", new_user_session_path, class: 'navbar-link'  %>
             <% end %>
           </ul>
         </div>
@@ -94,15 +94,15 @@
                     <li class="nav-header">Groups</li>
                   <% end %>
                   <% @managed_groups.each do |group| %>
-                    <li><%= link_to group.name, group_path(group)  %></li>
+                    <li><%= link_to group.name, group  %></li>
                   <% end %>
                 <% end %>
                 <li class="nav-header">Profile</li>
                 <li><%= link_to "See profile", competence_matrices_path  %></li>
-                <li><%= link_to "Fill competences", new_competence_matrix_path  %></li>
+                <li><%= link_to "Fill competences", competences_edit_matrix_path(current_user)  %></li>
               <% else %>
-                <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
-                <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+                <li><%= link_to "Sign up", new_user_registration_path, class: 'navbar-link'  %></li>
+                <li><%= link_to "Login", new_user_session_path, class: 'navbar-link'  %></li>
               <% end %>
             </ul>
           </div><!--/.well -->

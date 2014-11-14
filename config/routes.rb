@@ -5,13 +5,23 @@ Rails.application.routes.draw do
   end
 
   resources :groups do
-    get 'subgroup' => 'groups#new'
-    get 'employee' => 'groups#search_employee'
-    delete 'employee/:id' => 'groups#remove_employee'
-    post 'employee/:id' => 'groups#add_employee'
-    get 'manager' => 'groups#search_manager'
-    delete 'manager' => 'groups#remove_manager'
-    post 'manager/:id' => 'groups#add_manager'
+    get 'subgroup', to: 'groups#new'
+    get 'employee', to: 'groups#search_employee'
+    delete 'employee/:id', to: 'groups#remove_employee'
+    post 'employee/:id', to: 'groups#add_employee'
+    get 'manager', to: 'groups#search_manager'
+    delete 'manager', to: 'groups#remove_manager'
+    post 'manager/:id', to: 'groups#add_manager'
+  end
+
+  namespace :competences do
+    get 'edit/:id', action: 'edit_matrix',
+        as: 'edit_matrix'
+    get 'edit/:id/:matrix_id', action: 'edit_knowledge_area', 
+        as: 'edit_knowledge_area'
+    get 'edit/:id/:matrix_id/:knowledge_area_id', action: 'edit',
+        as: 'edit'
+    post 'save/:id/:matrix_id/:knowledge_area_id', action: 'save', as: 'save'
   end
 
   devise_for :users

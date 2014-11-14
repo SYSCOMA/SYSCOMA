@@ -1,0 +1,19 @@
+<%- model_class = Competence -%>
+<div class="page-header">
+  <h1><%=t '.title', default: [:'helpers.titles.edit', 'Fill %{model}'], model: model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Choose a <%= CompetenceMatrix.model_name.human %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @competence_matrices.each do |competence_matrix| %>
+      <tr>
+        <td><%= link_to competence_matrix.name, competences_edit_knowledge_area_path(@user, competence_matrix) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

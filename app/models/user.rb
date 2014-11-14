@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
   def manager? group
     self ==  group.manager || (group.subgroup_of.present? && manager?(group.subgroup_of))
   end
+
+  def subordinate? user
+    self.group.present? && user.manager?(self.group)
+  end
 end
