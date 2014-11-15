@@ -29,6 +29,13 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show', as: 'user'
   get 'users/:id/matrix/:matrix_id', to: 'users#show_matrix', as: 'user_matrix'
 
+  namespace :search do
+    get 'new', action: 'new'
+    post 'criteria', action: 'criteria', as: 'criteria'
+    post 'search', action: 'search', as: ''
+    post 'saved', action: 'saved', as: 'saved'
+  end
+
 
   get 'welcome/index'
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112234555) do
+ActiveRecord::Schema.define(version: 20141114220257) do
 
   create_table "abilities", force: true do |t|
     t.string   "name"
@@ -74,10 +74,10 @@ ActiveRecord::Schema.define(version: 20141112234555) do
 
   create_table "search_criteria", force: true do |t|
     t.string   "name"
-    t.integer  "scope"
     t.text     "composition"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "scope_id"
   end
 
   create_table "users", force: true do |t|

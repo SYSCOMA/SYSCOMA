@@ -1,0 +1,34 @@
+<%- model_class = SearchCriteria -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Saved Criteria</strong></dt>
+  <%= form_for @search_criteria, { url: search_saved_path, method: :post } do |f| %>
+    <dd><%= f.collection_select :id, @saved_searchs, :id, :name %></dd>
+    <%= submit_tag "Search", :class => 'btn btn-primary' %>
+    <% #link_to t('.destroy', :default => "Remove"), remove_search_path,
+        #class: 'btn btn-danger btn-xs', data: { method: :delete, :confirm => t('.confirm',
+        #:default => t("helpers.links.confirm", :default => 'Are you sure?')) }
+    %>
+  <% end %>
+</dl>
+<br/>
+
+<h2>New Search</h2>
+<%= form_for @search_criteria, { url: search_criteria_path, method: :post } do |f| %>
+  <dl class="dl-horizontal">
+    <dt><strong><%= f.label :scope, :class => 'control-label' %>
+        </strong></dt>
+    <dd><%= f.collection_select :scope_id, @scope_array, :id, :name, { include_blank: "Entire Company" },
+        :class => 'form-control' %></dd>
+  </dl>
+
+  <dl class="dl-horizontal">
+    <dt><strong>Save search?</strong></dt>
+    <dd><%= check_box_tag :save %></dd>
+  </dl>
+
+  <%= f.submit "Next", :class => 'btn btn-primary' %>
+<% end %>
