@@ -8,9 +8,15 @@ class AbilitiesController < ApplicationController
   end
 
   def update
-    if @ability.update(ability_params)
-      redirect_to competence_matrix_path(@ability.competence_matrix)
+    if params[:commit] == "Update Ability"
+      if @ability.update(ability_params)
+        redirect_to competence_matrix_path(@ability.competence_matrix)
+      else
+        render "edit"
+      end
     else
+      @ability.assign_attributes(ability_params)
+      @ability.values.build
       render "edit"
     end
   end
