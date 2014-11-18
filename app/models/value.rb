@@ -10,4 +10,5 @@ class Value < ActiveRecord::Base
   # TODO The correct should be a polymorphic association
   belongs_to :competence_matrix 
   belongs_to :ability
+  has_many :competences
 end

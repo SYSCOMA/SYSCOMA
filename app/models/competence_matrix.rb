@@ -4,6 +4,7 @@ class CompetenceMatrix < ActiveRecord::Base
   has_many :abilities, dependent: :destroy
   has_many :knowledge_areas, dependent: :destroy
   has_many :values, dependent: :destroy
+  has_many :competences, through: :abilities
 
   accepts_nested_attributes_for :abilities,
       reject_if: lambda { |a| a[:name].blank? }, 

@@ -1,0 +1,19 @@
+<%- model_class = CompetenceMatrix -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Competence matrix:</strong></dt>
+  <dd><%= @competence_matrix.name %></dd>
+</dl>
+
+<dl class="dl-horizontal">
+  <dt><strong>Value:</strong></dt>
+  <dd><%= @value.value %></dd>
+</dl>
+
+<%= render :partial => 'users', locals: { users: @users, filled_model: "value" } %>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              :back, :class => 'btn btn-default'  %>

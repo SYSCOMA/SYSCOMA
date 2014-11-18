@@ -1,0 +1,16 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>The follwing users had filled up some <%= filled_model %> in the matrix</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name,
+                      user_path(user) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>  

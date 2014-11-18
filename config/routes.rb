@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
 
   resources :competence_matrices do
-    resources :abilities, only: [:edit, :update]
+    resources :abilities, only: [:edit, :update] do
+      delete 'values/:id', to: 'competence_matrices#value', as: 'destroy_value'
+      get 'values/:id', to: 'competence_matrices#users', as: 'value_users'
+    end
+    delete 'abilities/:id', to: 'competence_matrices#ability', as: 'destroy_ability'
+    delete 'knowledge_areas/:id', to: 'competence_matrices#knowledge_area', as: 'destroy_knowledge_area'
+    delete 'values/:id', to: 'competence_matrices#value', as: 'destroy_value'
+    get 'users', to: 'competence_matrices#users', as: 'users'
+    get 'users/abilities/:ability_id', to: 'competence_matrices#users', as: 'ability_users'
+    get 'users/knowledge_areas/:knowledge_area_id', to: 'competence_matrices#users', as: 'knowledge_area_users'
+    get 'users/values/:value_id', to: 'competence_matrices#users', as: 'value_users'
   end
 
   resources :groups do
@@ -30,6 +40,7 @@ Rails.application.routes.draw do
   get 'users/:id/matrix/:matrix_id', to: 'users#show_matrix', as: 'user_matrix'
   resources :users, except: :create
   post 'users/create', to: 'users#create', as: 'create_user'
+
 
   #get 'users', to: 'users#index', as: 'users'
   #get 'users/new', to: 'users#new', as: 'new_user'
