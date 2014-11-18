@@ -70,7 +70,12 @@ class CompetencesController < ApplicationController
       else
         params = params.permit(:id, :knowledge_area_id, :ability_id, :user_id, :value_id)
         #raise params.inspect
-        Competence.find(params[:id]).update(params)
+        if params[:id].present?
+          Competence.find(params[:id]).update(params)
+        else
+          competence = Competence.new params
+          competence.save
+        end
       end
     end
 end

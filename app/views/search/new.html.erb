@@ -31,4 +31,6 @@
   </dl>
 
   <%= f.submit "Next", :class => 'btn btn-primary' %>
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+            :back, :class => 'btn btn-default' %>
 <% end %>

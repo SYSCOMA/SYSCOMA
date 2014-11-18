@@ -28,7 +28,7 @@
 </div>
 
 <div class="control-group field">
-  <%= f.label :password %>
+  <strong>Password</strong> (minimum 8 characters)
   <% if @validatable %>
   <em>(<%= @minimum_password_length %> characters minimum)</em>
   <% end %><br />
@@ -54,5 +54,5 @@
 <div class="actions">
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          welcome_index_path, :class => 'btn btn-default' %>
+          :back, :class => 'btn btn-default' %>
 </div>

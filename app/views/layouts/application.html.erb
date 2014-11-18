@@ -58,7 +58,8 @@
               <%= link_to 'Edit profile', edit_user_registration_path, class: 'navbar-link' %> |
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-link'  %>
             <% else %>
-              <%= link_to "Sign up", new_user_registration_path, class: 'navbar-link'  %> |
+              <%= #link_to "Sign up", new_user_registration_path, class: 'navbar-link'
+                %> <!--| TODO Registration process should be configurable by the administer-->
               <%= link_to "Login", new_user_session_path, class: 'navbar-link'  %>
             <% end %>
           </ul>
@@ -83,9 +84,9 @@
                   <li class="nav-header">Competence Matrices</li>
                   <li><%= link_to "See definitions", competence_matrices_path  %></li>
                   <li><%= link_to "New definition", new_competence_matrix_path  %></li>
-                  <li class="nav-header">Employee</li>
-                  <li><%= link_to "Manage employees", users_path  %></li>
-                  <li><%= link_to "Add employees", new_user_path  %></li>
+                  <li class="nav-header">Persons</li>
+                  <li><%= link_to "Manage persons", users_path  %></li>
+                  <li><%= link_to "Add person", new_user_path  %></li>
                   <li class="nav-header">Groups</li>
                   <li><%= link_to "Manage groups", groups_path  %></li>
                 <% end %>
@@ -101,7 +102,8 @@
                 <li><%= link_to "See profile", user_path(current_user)  %></li>
                 <li><%= link_to "Fill competences", competences_edit_matrix_path(current_user)  %></li>
               <% else %>
-                <li><%= link_to "Sign up", new_user_registration_path, class: 'navbar-link'  %></li>
+                <!--<li>--><%= #link_to "Sign up", new_user_registration_path, class: 'navbar-link'  
+                %><!--</li>-->
                 <li><%= link_to "Login", new_user_session_path, class: 'navbar-link'  %></li>
               <% end %>
             </ul>

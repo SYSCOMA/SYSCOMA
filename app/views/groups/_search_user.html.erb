@@ -21,4 +21,6 @@
     action: "search_#{action}", group_id: @group.id } do |f| %>
           <%= f.text_field :name %>
           <%= f.submit "New search", :class => 'btn btn-primary' %>
+          <%= link_to t('.back', :default => t("helpers.links.back")),
+            :back, :class => 'btn btn-default' %>
 <% end %>
