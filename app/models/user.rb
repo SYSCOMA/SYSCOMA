@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   belongs_to :group
   has_many :managed_groups, class_name: "Group", foreign_key: "manager_id"
+  has_many :search_criteria
 
   def manager? group
     self ==  group.manager || (group.subgroup_of.present? && manager?(group.subgroup_of))
