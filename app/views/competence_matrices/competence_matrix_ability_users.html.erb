@@ -10,10 +10,10 @@
 
 <dl class="dl-horizontal">
   <dt><strong>Ability:</strong></dt>
-  <dd><%= @ablity.name %></dd>
+  <dd><%= @ability.name %></dd>
 </dl>
 
-<%= render :partial => 'users', locals: { users: @users, filled_model: "ability" } %>
+<%= render :partial => 'users', locals: { users: @users, filled_model: "in this ability" } %>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               :back, :class => 'btn btn-default'  %>

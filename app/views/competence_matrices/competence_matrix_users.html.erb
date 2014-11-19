@@ -8,7 +8,7 @@
   <dd><%= @competence_matrix.name %></dd>
 </dl>
 
-<%= render :partial => 'users', locals: { users: @users, filled_model: "competence matrix" } %>
+<%= render :partial => 'users', locals: { users: @users, filled_model: "in this competence matrix" } %>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               :back, :class => 'btn btn-default'  %>

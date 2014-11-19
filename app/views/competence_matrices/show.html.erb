@@ -43,7 +43,7 @@
     <% @competence_matrix.abilities.each do |ability| %>
       <tr>
         <td><%= ability.name %></td>
-        <td><%= link_to t('.edit', :default => "Edit values"),
+        <td><%= link_to t('.edit', :default => "Edit competence values"),
                       edit_competence_matrix_ability_path(@competence_matrix, ability), :class => 'btn btn-default btn-xs' %>
         <% if destroy? ability %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -63,10 +63,10 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="3"><%= Value.model_name.human.pluralize.titleize %></th>
+      <th colspan="3">Competence values</th>
     </tr>
     <tr>
-      <th><%= Value.model_name.human.titleize %></th>
+      <th>Competence value</th>
       <th>Rank</th>
       <th></th>
     </tr>
@@ -84,7 +84,7 @@
                 :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :key => "value", :default => 'Are you sure?')) },
                 :class => 'btn btn-danger btn-xs' %></td>
           <% else %>
-            <%= link_to "Why can not I delete this value?",
+            <%= link_to "Why can not I delete this competence value?",
                 competence_matrix_value_users_path(@competence_matrix, value) %>
           <% end %>
       </tr>

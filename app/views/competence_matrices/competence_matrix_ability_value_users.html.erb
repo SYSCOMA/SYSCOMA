@@ -10,15 +10,15 @@
 
 <dl class="dl-horizontal">
   <dt><strong>Ability:</strong></dt>
-  <dd><%= @ablity.name %></dd>
+  <dd><%= @ability.name %></dd>
 </dl>
 
 <dl class="dl-horizontal">
-  <dt><strong>Value:</strong></dt>
+  <dt><strong>Competence value:</strong></dt>
   <dd><%= @value.value %></dd>
 </dl>
 
-<%= render :partial => 'users', locals: { filled_model: "value" } %>
+<%= render :partial => 'users', locals: { users: @users, filled_model: "with this competence value" } %>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               :back, :class => 'btn btn-default'  %>

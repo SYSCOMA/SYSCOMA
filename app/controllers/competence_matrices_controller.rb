@@ -79,24 +79,19 @@ class CompetenceMatricesController < ApplicationController
   def destroy_knowledge_area
     knowledge_area = KnowledgeArea.find(params[:id])
     knowledge_area.destroy
-    redirct_to @competence_matrix
+    redirect_to @competence_matrix
   end
 
   def destroy_ability
     ability = Ability.find(params[:id])
     ability.destroy
-    redirct_to @competence_matrix
+    redirect_to @competence_matrix
   end
 
   def destroy_value
     value = Value.find(params[:id])
     value.destroy
-    if params.key? :ability_id
-      ability = Ability.find(params[:ability_id])
-      redirect_to edit_competence_matrix_ability_path(@competence_matrix, ability)
-    else
-      redirct_to @competence_matrix
-    end
+    redirect_to @competence_matrix
   end
 
   private

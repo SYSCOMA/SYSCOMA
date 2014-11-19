@@ -1,65 +1,65 @@
-<%= form_for @ability, url: competence_matrix_ability_path(@ability.competence_matrix, @ability), html: { class: "form-horizontal ability" } do |f| %>
+<dl class="dl-horizontal">
+  <dt><strong>Competence Matrix:</strong></dt>
+  <dd><%= @competence_matrix.name %></dd>
+</dl>
 
-    <% if @ability.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@ability.errors.count, "error") %> prohibited this ability from being saved:</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-        <% @ability.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+<dl class="dl-horizontal">
+  <dt><strong>Ability:</strong></dt>
+  <dd><%= @ability.name %></dd>
+</dl>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="3">Competence <%= Value.model_name.human.pluralize %></th>        
+    </tr>
+    <tr>
+      <th>Competence value</th>
+      <th>Rank</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="values">
+    <% @values.each do |value| %>
+      <% if destroy? value %>
+        <%= form_for value, url: competence_matrix_ability_update_path(@competence_matrix, @ability, value), method: :post do |f| %>
+          <%= f.hidden_field :id %>
+          <tr>
+            <%= render partial: 'value_form_fields', locals: { f: f } %>
+            <td>
+              <%= f.submit "Save", :class => 'btn btn-primary' %>
+              <%= f.submit "Delete", 
+                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :key => "value", :default => 'Are you sure?')) },
+                    :class => 'btn btn-danger' %>
+            </td>
+          </tr>
         <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.hidden_field :name, :class => 'form-control' %>
-      <%= @ability.name %>
-    </div>
-    <%= error_span(@ability[:name]) %>
-  </div>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th colspan="3"><%= Value.model_name.human.pluralize %></th>        
-      </tr>
-      <tr>
-        <th>Value</th>
-        <th>Rank</th>
-        <th><%= t '.destroy', :default => t("helpers.links.destroy") %></th>
-      </tr>
-    </thead>
-    <tbody id="values">
-      <%= f.fields_for :values do |ff| %>
+      <% else %>
         <tr>
           <td>
-            <div class="controls"><%= ff.text_field :value, :class => 'form-control' %></div>
+            <%= value.value %>
           </td>
           <td>
-            <div class="controls"><%= ff.text_field :rank, :class => 'form-control' %></div>
+            <%= value.rank %>
           </td>
           <td>
-            <div class="controls"><%= ff.check_box :_destroy%></div>
+            <%= link_to "Why can not I delete this value?",
+                competence_matrix_ability_value_users_path(@competence_matrix, @ability, value) %>
           </td>
         </tr>
       <% end %>
+    <% end %>
+    <%= form_for @new_value, url: competence_matrix_ability_create_path(@competence_matrix, @ability), html: { class: "form-horizontal ability" } do |f| %>
       <tr>
-        <td colspan="2"><%= f.submit "Add value", :class => 'btn btn-default' %></td>
+        <%= render partial: 'value_form_fields', locals: { f: f } %>
+        <td>
+          <%= f.submit "Save", :class => 'btn btn-primary' %>
+        </td>
       </tr>
-    </tbody>
-  </table>
-  <%= error_span(@ability[:values]) %>
+    <% end %>
+  </tbody>
+</table>
+<%= error_span(@ability[:values]) %>
 
-
-
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            :back, :class => 'btn btn-default' %>
-
-<% end %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+          :back, :class => 'btn btn-default' %>

@@ -1,24 +1,32 @@
 class AbilitiesController < ApplicationController
-  before_action :set_ability
+  before_action :set_ability, only: [:edit]
+  before_action :set_secondary_ability, only: [:create, :update]
+  before_action :set_competence_matrix
   before_action :authenticate_user!
   before_action :authenticate_admin_user
 
   def edit
-    @ability.values.build
+    @ability
+    @values = @ability.values
+    @new_value = Value.new
+    @new_value.ability = @ability
   end
 
   def update
-    if params[:commit] == "Update Ability"
-      if @ability.update(ability_params)
-        redirect_to competence_matrix_path(@ability.competence_matrix)
-      else
-        render "edit"
-      end
+    value = Value.find(params[:id])
+    if params[:commit]=="Delete"
+      value.destroy
     else
-      @ability.assign_attributes(ability_params)
-      @ability.values.build
-      render "edit"
+      value.update(value_params)
     end
+    redirect_to edit_competence_matrix_ability_path(@competence_matrix, @ability)
+  end
+
+  def create
+    value = Value.new(value_params)
+    value.save
+    @ability.reload
+    redirect_to edit_competence_matrix_ability_path(@competence_matrix, @ability)
   end
 
   private
@@ -26,9 +34,16 @@ class AbilitiesController < ApplicationController
       @ability = Ability.find(params[:id])
     end
 
-    def ability_params
-      params.require(:ability).permit(:name, :competence_matrix,
-          values_attributes: [:id, :value, :rank, :_destroy])
+    def set_secondary_ability
+      @ability = Ability.find(params[:ability_id])
+    end
+
+    def set_competence_matrix
+      @competence_matrix = CompetenceMatrix.find(params[:competence_matrix_id])
+    end
+
+    def value_params
+      params.require(:value).permit(:value, :rank, :ability_id)
     end
     
     def authenticate_admin_user

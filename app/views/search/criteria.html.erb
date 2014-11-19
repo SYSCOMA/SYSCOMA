@@ -72,7 +72,7 @@
       <% if @ability.present? %>
         </dl>
         <dl class="dl-horizontal">
-          <dt><strong><%= f.label "Value" %></strong></dt>
+          <dt><strong><%= f.label "Competence value" %></strong></dt>
           <dd><%= select_tag :value_id, options_from_collection_for_select(@values.to_a, :id, :value) %></dd>
       <% end %>
     <% else %>

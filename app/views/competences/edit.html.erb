@@ -4,6 +4,10 @@
 </div>
 
 <dl class="dl-horizontal">
+  <dt><strong>Person:</strong></dt>
+  <dd><%= @user.name %></dd>
+</dl>
+<dl class="dl-horizontal">
   <dt><strong><%= CompetenceMatrix.model_name.human.titleize %>:</strong></dt>
   <dd><%= @competence_matrix.name %></dd>
 </dl>
@@ -17,7 +21,7 @@
     <thead>
       <tr>
         <th><%= Ability.model_name.human %></th>
-        <th><%= Value %></th>
+        <th>Competence value</th>
       </tr>
     </thead>
     <tbody>

@@ -3,6 +3,11 @@
   <h1><%=t '.title', default: [:'helpers.titles.edit', 'Fill %{model}'], model: model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 
+<dl class="dl-horizontal">
+  <dt><strong>Person:</strong></dt>
+  <dd><%= @user.name %></dd>
+</dl>
+
 <table class="table table-striped">
   <thead>
     <tr>
