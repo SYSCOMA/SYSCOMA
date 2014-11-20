@@ -81,6 +81,7 @@ pt-BR:
     results_for: "Resultados para"
     new_search: "Nova busca"
     search_criteria: "critérios de busca"
+    search_results: "Resultados da busca"
     composition: "formula"
     conective: "conectivo"
     next: "Próximo"
@@ -89,6 +90,7 @@ pt-BR:
     see: "Ver"
     saved: "Buscas salvas"
     name: "Nome"
+    scope: "escopo"
   groups:
     group: "grupo"
     groups: "grupos"

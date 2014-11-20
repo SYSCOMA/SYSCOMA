@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_saved_searches
-  before_action :set_scope_array
+  before_action :set_saved_searches, except: [:search]
+  before_action :set_scope_array, except: [:search]
   before_action :set_search_criteria, except: [:new]
 
   def new
@@ -35,7 +35,7 @@ class SearchController < ApplicationController
   def add_element
     @competence_matrices = CompetenceMatrix.all
     element = "(#{params[:knowledge_area_id]}:#{params[:ability_id]}:#{params[:sign]}:#{params[:value_rank]})"
-    add_criterion element, params[:conective]
+    add_criterium element, params[:conective]
     render 'competence_matrix_step'
   end
 
@@ -49,7 +49,7 @@ class SearchController < ApplicationController
       saved_search.destroy
     else # Add
       element = "(#{saved_id})"
-      add_criterion element, params[:conective]
+      add_criterium element, params[:conective]
     end
     render 'competence_matrix_step'
   end
@@ -59,6 +59,16 @@ class SearchController < ApplicationController
     @search_criteria.user = current_user
     @search_criteria.save
     render 'competence_matrix_step'
+  end
+
+  def search
+    @users = process_search_criteria @search_criteria.composition
+    if @search_criteria.scope.present?
+      @users.select do |user| 
+        user.group.present? && (user.group == @search_criteria.scope || user.group.subordinate?(@search_criteria.scope))
+      end
+    end
+    render 'result'
   end
 
   private
@@ -79,7 +89,7 @@ class SearchController < ApplicationController
       @search_criteria = SearchCriteria.new(params.require(:search_criteria).permit(:id, :scope_id,:composition, :name))
     end
 
-    def add_criterion element, conective=nil
+    def add_criterium element, conective=nil
       @search_criteria.composition ||= ""
       if conective.present?
         @search_criteria.composition = @search_criteria.composition.prepend "("
@@ -91,20 +101,6 @@ class SearchController < ApplicationController
       end
     end
 
-    def search
-      @search_criteria = SearchCriteria.new(params.require(:search_criteria).permit(:scope_id, :name, :composition))
-      if params[:save]
-        @search_criteria.save
-      end
-      @users = process_search_criteria @search_criteria.composition
-      if @search_criteria.scope.present?
-        @users.select do |user| 
-          user.group == @search_criteria || user.group.subordinate?(@search_criteria.scope)
-        end
-      end
-      render 'search'
-    end
-
     # Element is in one of the following formats:
     # (saved_seach_id)
     # (knowledge_area_id:knowledge_area_id:ability_id:comparator:value_rank)
@@ -113,13 +109,12 @@ class SearchController < ApplicationController
     def process_search_criteria element
       elements = split_closure element
       if elements.one?
-        criterion = elements.first
-        criterion = criterion[1..-2]
-        split = criterion.split ":"
-        if split.one? #first case
-          process_search_criteria SearchCriteria.find(split.first.to_i).composition
+        criterium = elements.first
+        criterium = criterium[1..-2].split ":"
+        if criterium.one? #first case
+          process_search_criteria SearchCriteria.find(criterium.first.to_i).composition
         else #second case
-          process_criterion split
+          process_criterium criterium
         end
       elsif elements.second == "AND" #third case
         process_search_criteria(elements.first) & process_search_criteria(elements.last)
@@ -129,18 +124,20 @@ class SearchController < ApplicationController
       end
     end
 
-    # separate into smaller elements, delimited by "(" and ")"
+    # split into smaller elements, delimited by "(" and ")"
     def split_closure element
       open = -1
+      elements=[]
       element.each_char.with_index do |char, i|
         if char=="("
           open += 1
         elsif char==")"
           open -= 1
-          if open == 0
-            if i == element.size-1
-              elements = [element]
-            elsif element[(i+1)..(i+2)]=="OR"
+          if open == -1 #this happens when the element is unique
+            elements = [element]
+            break
+          elsif open == 0
+            if element[(i+1)..(i+2)]=="OR"
               elements = [element[1..i], "OR", element[(i+3)..-2]]
             else # element[(i+1)..(i+3)]=="and"
               elements = [element[1..i], "AND", element[(i+4)..-2]]
@@ -153,25 +150,28 @@ class SearchController < ApplicationController
     end
 
     #do the query
-    def process_criterion split
+    def process_criterium split
       case split.third
       when "<" then competences_result = Competence.joins(:value).
         where("knowledge_area_id = ? AND competences.ability_id = ? AND rank < ?",
-        split.first, aplit.second, split.fourth)
+        split.first, split.second, split.fourth)
       when ">" then competences_result = Competence.joins(:value).
         where("knowledge_area_id = ? AND competences.ability_id = ? AND rank > ?",
-        split.first, aplit.second, split.fourth)
+        split.first, split.second, split.fourth)
       when "<=" then competences_result = Competence.joins(:value).
         where("knowledge_area_id = ? AND competences.ability_id = ? AND rank <= ?",
-        split.first, aplit.second, split.fourth)
+        split.first, split.second, split.fourth)
       when ">=" then competences_result = Competence.joins(:value).
         where("knowledge_area_id = ? AND competences.ability_id = ? AND rank >= ?",
-        split.first, aplit.second, split.fourth)
+        split.first, split.second, split.fourth)
       when "=" then competences_result = Competence.joins(:value).
         where("knowledge_area_id = ? AND competences.ability_id = ? AND rank = ?",
-        split.first, aplit.second, split.fourth)
+        split.first, split.second, split.fourth)
       end
-      result = competences_result.collect { |competence| competence.user }
-      result.uniq
+
+      #selecting first the users ids to do less accesses to the database
+      users_ids = competences_result.collect { |competence| competence.user_id }
+      users_ids.uniq
+      users = users_ids.collect { |id| User.find(id) }
     end
 end

@@ -81,6 +81,7 @@ en:
     results_for: "Results for"
     new_search: "New search"
     search_criteria: "search criteria"
+    search_results: "Search Results"
     composition: "formula"
     conective: "conective"
     next: "Next"
@@ -89,6 +90,7 @@ en:
     see: "See"
     saved: "Saved searches"
     name: "Label"
+    scope: "scope"
   groups:
     group: "group"
     groups: "groups"
