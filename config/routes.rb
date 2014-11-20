@@ -51,9 +51,12 @@ Rails.application.routes.draw do
 
   namespace :search do
     get 'new', action: 'new'
-    post 'criteria', action: 'criteria', as: 'criteria'
+    post 'knowledge_area_ability_and_operator_step', action: 'knowledge_area_ability_and_operator_step', as: 'knowledge_area_ability_and_operator_step'
+    post 'value_step', action: 'value_step', as: 'value_step'
+    post 'add_element', action: 'add_element', as: 'add_element'
+    post 'add_saved', action: 'add_saved', as: 'add_saved'
     post 'search', action: 'search', as: ''
-    post 'saved', action: 'saved', as: 'saved'
+    post 'save', action: 'save', as: 'save'
   end
 
 

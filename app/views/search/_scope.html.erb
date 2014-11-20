@@ -1,0 +1,5 @@
+<dl class="dl-horizontal">
+  <dt><strong><%= f.label :scope %>
+      </strong></dt>
+  <dd><%= f.collection_select :scope_id, @scope_array, :id, :name, { include_blank: "Entire Company", selected: @search_criteria.scope_id } %></dd>
+</dl>

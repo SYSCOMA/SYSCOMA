@@ -1,0 +1,35 @@
+<% if @saved_searches.any? %>
+  <div class="row">
+    <%= form_for @search_criteria, { url: search_add_saved_path, method: :post } do |f| %>
+      <div class="col-lg-8">
+        <div class="well">
+          <dl class="dl-horizontal">
+            <dt><strong><%= t('searches.saved', default: "Saved searches") %></strong></dt>
+            <%= render partial: 'hidden_fields', locals: { f: f } %>
+            <dd>
+              <% if @search_criteria.composition.present? %>
+                <%= select_tag :conective, options_for_select(conectives) %>
+              <% end %>
+              <%= select_tag :saved_id, options_from_collection_for_select(@saved_searches, :id, :name, @saved_search) %>
+              <%= submit_tag t('searches.see', default: "See"), :class => 'btn btn-primary btn-xs' %>
+              <%= submit_tag t('searches.add', default: "Add"), :class => 'btn btn-primary btn-xs' %>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <% if @saved_search.present? %>
+          <div class="well">
+            <dl>
+              <dt><strong><%= @saved_search.name %></strong></dt>
+              <dd><%= @saved_search.formula %></dd>
+              <dd><%= submit_tag t('helpers.links.destroy', default: "Delete"),
+                          data: { confirm: t('helpers.links.confirm', default: 'Are you sure?') },
+                          class: 'btn btn-xs btn-danger' %></dd>
+            </dl>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,56 @@
+<%- model_class = SearchCriteria -%>
+<div class="page-header">
+  <h1><%= t('searches.search', default: "search").titleize %></h1>
+</div>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="well">
+
+      <%= form_for @search_criteria, url: search_value_step_path, method: :post, html: { class: "form-horizontal search" } do |f|%>
+        <%= render partial: 'hidden_fields', locals: { f: f } %>
+
+        <%= hidden_field_tag :competence_matrix_id, @competence_matrix.id %>
+
+        <%= render partial: "scope", locals: { f: f } %>
+
+        <% if @search_criteria.composition.present? %>
+          <dl class="dl-horizontal">
+            <dt><strong><%= f.label t('searches.conective', default: 'conective').humanize %></strong></dt>
+            <dd><%= select_tag :conective, options_for_select(conectives, @conective)  %></dd>
+          </dl>
+        <% end %>
+
+        <dl class="dl-horizontal">
+          <dt><strong><%= f.label t('matrices.competence_matrix', default: 'competence matrix').humanize %></strong></dt>
+          <dd><%= @competence_matrix.name %></dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+          <dt><strong><%= f.label t('matrices.knowledge_areas.knowledge_area', default: "knowledge area").titleize %></strong></dt>
+          <dd><%= select_tag :knowledge_area_id, options_from_collection_for_select(@knowledge_areas, :id, :name) %></dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+          <dt><strong><%= f.label t('matrices.abilities.ability', default: "Ability").titleize %></strong></dt>
+          <dd><%= select_tag :ability_id, options_from_collection_for_select(@abilities, :id, :name) %></dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+          <dt><strong><%= f.label t('searches.operation', default: "operation").titleize %></strong></dt>
+          <dd><%= select_tag :sign, options_for_select(signs) %></dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+          <dt></dt>
+          <dd><%= f.submit t('searches.next', default: "Next"), class: 'btn btn-primary btn-xs' %></dd>
+        </dl>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-3">
+  </div>
+</div>
+
+<%= render partial: 'saved_searches' %>
+<%= render partial: 'formula' %>

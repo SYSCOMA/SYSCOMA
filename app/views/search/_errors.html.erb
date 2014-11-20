@@ -1,0 +1,14 @@
+<% if @search_criteria.errors.any? %>
+  <div id="error_expl" class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= t('errors.messages.not_saved', default: pluralize(@search_criteria.errors.count, "error").concat(" prohibited this %{resource} from being saved:"), count: @search_criteria.errors.count.to_s, resource: t('searches.search_criteria', default: 'search criteria')) %></h3>
+    </div>
+    <div class="panel-body">
+      <ul>
+      <% @search_criteria.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

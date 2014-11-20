@@ -6,4 +6,8 @@ class SearchCriteria < ActiveRecord::Base
   has_many :criteria, dependent: :destroy
   belongs_to :scope, class_name: 'Group'
   belongs_to :user
+
+  def formula
+    composition
+  end
 end

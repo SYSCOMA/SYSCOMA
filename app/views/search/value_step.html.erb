@@ -1,0 +1,64 @@
+<%- model_class = SearchCriteria -%>
+<div class="page-header">
+  <h1><%= t('searches.search', default: "search").titleize %></h1>
+</div>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="well">
+
+      <%= form_for @search_criteria, url: search_add_element_path, method: :post, html: { class: "form-horizontal search" } do |f|%>
+        <%= render partial: 'hidden_fields', locals: { f: f } %>
+
+        <%= hidden_field_tag :competence_matrix_id, @competence_matrix.id %>
+        <%= hidden_field_tag :knowledge_area_id, @knowledge_area.id %>
+        <%= hidden_field_tag :ability_id, @ability.id %>
+        <%= hidden_field_tag :sign, @sign %>
+
+        <%= render partial: "scope", locals: { f: f } %>
+
+        <% if @search_criteria.composition.present? %>
+          <dl class="dl-horizontal">
+            <dt><strong><%= f.label t('searches.conective', default: 'conective').humanize %></strong></dt>
+            <dd><%= select_tag :conective, options_for_select(conectives, @conective) %></dd>
+          </dl>
+        <% end %>
+
+        <dl class="dl-horizontal">
+          <dt><strong><%= f.label t('matrices.competence_matrix', default: 'competence matrix').humanize %></strong></dt>
+          <dd><%= @competence_matrix.name %></dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+          <dt><strong><%= f.label t('matrices.knowledge_areas.knowledge_area', default: "knowledge area").titleize %></strong></dt>
+          <dd><%= @knowledge_area.name  %></dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+          <dt><strong><%= f.label t('matrices.abilities.ability', default: "Ability").titleize %></strong></dt>
+          <dd><%= @ability.name %></dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+          <dt><strong><%= f.label t('searches.operation', default: "operation").titleize %></strong></dt>
+          <dd><%= @sign %></dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+          <dt><strong><%= f.label t('competences.competence_value', default: "competence value").titleize %></strong></dt>
+          <dd><%= select_tag :value_rank, options_from_collection_for_select(@values.to_a, :rank, :value) %></dd>
+        </dl>
+
+        <dl class="dl-horizontal">
+          <dt></dt>
+          <dd><%= f.submit t('searches.add', default: "Add"), class: 'btn btn-primary btn-xs' %></dd>
+        </dl>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-3">
+  </div>
+</div>
+
+<%= render partial: 'saved_searches' %>
+<%= render partial: 'formula' %>
