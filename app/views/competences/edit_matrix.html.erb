@@ -1,17 +1,17 @@
 <%- model_class = Competence -%>
 <div class="page-header">
-  <h1><%=t '.title', default: [:'helpers.titles.edit', 'Fill %{model}'], model: model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%= t('competences.fill_competences', default: 'Fill Competences').titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong>Person:</strong></dt>
+  <dt><strong><%= t('users.user', default: "user").titleize %>:</strong></dt>
   <dd><%= @user.name %></dd>
 </dl>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Choose a <%= CompetenceMatrix.model_name.human %></th>
+      <th><%= t('competences.choose', default: 'Choose a %{model}.', model: t('matrices.competence_matrix', default: "competence matrix")) %></th>
     </tr>
   </thead>
   <tbody>
@@ -23,5 +23,5 @@
   </tbody>
 </table>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-            :back, :class => 'btn btn-default' %>
+<%= link_to t('helpers.links.back', default: "Back"),
+            :back, class: 'btn btn-default' %>

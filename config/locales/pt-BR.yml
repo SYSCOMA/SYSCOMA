@@ -1,0 +1,112 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+pt-BR:
+  syscoma: "Syscoma"
+  welcome:
+    welcome: "Bem-vindo"
+    title: "Bem-vindo ao "
+    subtitle: "Um Sistema para o Gerenciamento de Competências"
+  users:
+    title: "Pessoa"
+    plural_title: "Pessoas"
+    user: "pessoa"
+    users: "pessoas"
+    name: "nome"
+    email: "e-mail"
+    new_user: "Nova pessoa"
+    edit_user: "Editar pessoa"
+    admin: "administrador do sistema"
+    save: "Salvar pessoa"
+    profile: "perfil"
+    see_profile: "Ver perfil"
+    manage_users: "Gerenciar pessoas"
+    add_user: "Adicionar pessoa"
+    password:
+      password: "senha"
+      minimum: "%{lenght} caracteres no mínimo"
+      confirmation: "confirmação de senha"
+      leave_blank: "deixe em branco se não quiser alterar"
+      current: "senha atual"
+      current_password_needed: "nós precisamos da sua senha atual para autorizar as mudanças"
+    filled_list: "Os seguintes %{users} preencheram alguma %{competences} com este %{model}."
+  matrices:
+    fill: "preencher"
+    fill_up: "preencher"
+    matrix: "matriz"
+    matrices: "matrizes"
+    fill_matrix: "Preencher matriz"
+    fill_matrices: "Preencher matrizes"
+    competence_matrix: "matriz de competência"
+    competence_matrices: "matrizes de competência"
+    name: "nome"
+    see_definitions: "Ver definições"
+    new_definition: "Nova definição"
+    abilities:
+      ability: "abilidade"
+      abilities: "abilidades"
+      edit: "Editar valores possíveis da abilidade"
+    knowledge_areas:
+      knowledge_area: "área de conhecimento"
+      knowledge_areas: "áreas de conhecimento"
+  competences:
+    competence: "competências"
+    fill_competences: "Preencher competências"
+    choose: "Escolha uma %{model}."
+    values:
+      competence_value: "valor da competência"
+      competence_values: "valores da competência"
+      rank: "ordem"
+      none: "Nulo"
+  searches:
+    search: "buscar"
+    results_for: "Resultados para"
+    new_search: "Nova busca"
+  groups:
+    group: "grupo"
+    groups: "grupos"
+    name: "nome"
+    manager: "gerente"
+    employee: "funcionário"
+    employees: "funcionários"
+    manage_groups: "Gerenciar grupos"
+    remove: "Remover"
+    subgroups: "Subgrupos"
+    subgroup: "subgrupo"
+    add_new: "Adicionar novo %{action} ao grupo %{group_name}."
+  destroy:
+    cannot_be_deleted: "%{model} não pode ser removido."
+    see_why: "Veja porque."
+  model:
+    add: "Adicionar %{model}"
+  devise:
+    custom:
+      cancel_account: "Cancelar minha conta"
+      unhappy: "Está triste?"
+      sign_up: "cadastrar"
+      login: "entrar"
+      log_in: "entrar"
+      forgot_password: "Esqueceu a senha?"
+      didnt_received_confirmation_instructions: "Não recebeu intruções de confirmação?"
+      didnt_received_unlock_instructions: "Não recebeu instruções de desbloqueio?"
+      sign_in_with: "Entrar com %{provider}"
+      logout: "sair"
+      logged_in_as: "Entrou como"

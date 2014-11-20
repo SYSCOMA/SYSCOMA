@@ -1,9 +1,8 @@
 <%- model_class = User -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => "Person"#model_class.model_name.human.titleize 
-  %></h1>
+  <h1><%= t('users.new_user', default: 'New user') %></h1>
 </div>
 
-<%= form_for @user, url: { controller: 'users', action: 'create' }, :html => { :class => "form-horizontal group" } do |f| %>
-  <%= render :partial => 'form', locals: { f: f } %>
+<%= form_for @user, url: { controller: 'users', action: 'create' }, html: { class: "form-horizontal group" } do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
 <% end %>

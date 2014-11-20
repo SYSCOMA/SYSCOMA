@@ -1,8 +1,8 @@
-<h1>Welcome to SYSCOMA</h1>
-<h5>A System for Competence Management</h5>
+<h1><%= t('welcome.title', default: "Welcome to") %> SYSCOMA</h1>
+<h5><%= t('welcome.subtitle', default: "A System for Competence Management") %></h5>
 
 <p>
   <% if user_signed_in? %>
-    Welcome <%= current_user.name %>
+    <%= t('welcome.welcome', default: "Welcome") %> <%= current_user.name %>
   <% end %>
 </p>

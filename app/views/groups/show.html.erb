@@ -1,25 +1,25 @@
 <%- model_class = Group -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%= t('groups.group', default: "group").titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dt><strong><%= t('groups.name', default: "name") %>:</strong></dt>
   <dd><%= @group.name %></dd>
 </dl>
 
 <dl class="dl-horizontal">
-  <dt><strong>Manager:</strong></dt>
+  <dt><strong><%= t('groups.manager', default: "manager").titleize %>:</strong></dt>
   <% if @group.manager.present? %>
     <dd><%= @group.manager.name %></dd>
     <dd><% if current_user.admin? %>
-      <%= link_to t('.destroy', :default => "Remove"), { controller: "groups", action: "remove_manager", group_id: @group.id }, class: 'btn btn-default btn-xs', data: { method: :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %>
+      <%= link_to t('groups.remove', default: "Remove"), { controller: "groups", action: "remove_manager", group_id: @group.id }, class: 'btn btn-default btn-xs', data: { method: :delete, confirm: t('helpers.links.confirm', default: 'Are you sure?') } %>
       <% end %>
     </dd>
   <% elsif current_user.admin? %>
-    <%= form_for :user, :url => group_manager_path(@group), method: :get do |f| %>
+    <%= form_for :user, url: group_manager_path(@group), method: :get do |f| %>
           <%= f.text_field :name %>
-          <%= f.submit "Add manager", :class => 'btn btn-primary' %>
+          <%= f.submit t('model.add', default: "Add %{model}", model: t('groups.manager', default: "manager")), class: 'btn btn-primary' %>
     <% end %>
   <% end %>
 
@@ -28,57 +28,55 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="2">Subgroups</th>
+      <th colspan="2"><%= t('groups.subgroups', default: "Subgroups") %></th>
     </tr>
   </thead>
   <tbody>
     <% @group.subgroups.each do |subgroup| %>
       <tr>
         <td><%= link_to subgroup.name, group_path(subgroup) %></td>
-        <td><%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_group_path(subgroup), :class => 'btn btn-default btn-xs' %>
-            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      group_path(subgroup), :class => 'btn btn-default btn-xs', data: { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %></td>
+        <td><%= link_to t('helpers.links.edit', default: "Edit"),
+                      edit_group_path(subgroup), class: 'btn btn-default btn-xs' %>
+            <%= link_to t('helpers.links.destroy', default: "Destroy"),
+                      group_path(subgroup), class: 'btn btn-default btn-xs', data: { confirm: t("helpers.links.confirm", default: 'Are you sure?') } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <% if current_user.admin? %>
-  <%= link_to t('.new', :default => t("helpers.links.new")),
+  <%= link_to t('helpers.title.new', default: "New %{model}", model: t('groups.subgroup', default: "subgroup")),
             group_subgroup_path(@group),
-            :class => 'btn btn-primary' %>
+            class: 'btn btn-primary' %>
 <% end %>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="2">Employees</th>
+      <th colspan="2"><%= t('groups.employees', default: "Employees") %></th>
     </tr>
   </thead>
   <tbody>
     <% @group.users.each do |user| %>
       <tr>
         <td><%= link_to user.name, user_path(user) %></td>
-        <td><%= link_to t('.destroy', :default => "Remove"), { controller: "groups", action: "remove_employee", group_id: @group.id, id: user.id }, class: 'btn btn-default btn-xs', data: { method: :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %></td>
+        <td><%= link_to t('groups.remove', default: "Remove"), { controller: "groups", action: "remove_employee", group_id: @group.id, id: user.id }, class: 'btn btn-default btn-xs', data: { method: :delete, confirm: t("helpers.links.confirm", default: 'Are you sure?') } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= form_for :user, :url => group_employee_path(@group), method: :get do |f| %>
+<%= form_for :user, url: group_employee_path(@group), method: :get do |f| %>
           <%= f.text_field :name %>
-          <%= f.submit "Add employee", :class => 'btn btn-primary' %>
+          <%= f.submit t('model.add', default: "Add %{model}", model: t('groups.employee', default: "employee")), class: 'btn btn-primary' %>
 <% end %>
 
 <br/>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              groups_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_group_path(@group), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+<%= link_to t('helpers.links.back', default: "Back"),
+              groups_path, class: 'btn btn-default'  %>
+<%= link_to t('helpers.links.edit', default: "Edit"),
+              edit_group_path(@group), class: 'btn btn-default' %>
+<%= link_to t('helpers.links.destroy', default: "Delete"),
               group_path(@group),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-<%= link_to t('.back', :default => t("helpers.links.back")),
-            :back, :class => 'btn btn-default' %>
+              method: 'delete',
+              data: { confirm: t("helpers.links.confirm", default: 'Are you sure?') },
+              class: 'btn btn-danger' %>

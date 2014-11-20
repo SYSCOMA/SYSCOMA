@@ -1,17 +1,17 @@
 <%- model_class = CompetenceMatrix -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%= t('matrices.competence_matrix', default: "competence matrix").titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dt><strong><%= t('matrices.name', default: "name") %>:</strong></dt>
   <dd><%= @competence_matrix.name %></dd>
 </dl>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="2"><%= KnowledgeArea.model_name.human.pluralize.titleize %></th>
+      <th colspan="2"><%= t('matrices.knowledge_areas.knowledge_areas', default: "knowledge areas").titleize %></th>
     </tr>
   </thead>
   <tbody>
@@ -19,14 +19,14 @@
       <tr>
         <td><%= knowledge_area.name %></td>
         <td><% if destroy? knowledge_area %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <%= link_to t('helpers.links.destroy', default: "Delete"),
                 competence_matrix_destroy_knowledge_area_path(@competence_matrix, knowledge_area),
-                :method => 'delete',
-                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :key => "value", :default => 'Are you sure?')) },
-                :class => 'btn btn-danger btn-xs' %>
+                method: :delete,
+                data: { confirm: t('helpers.links.confirm', key: "value", default: 'Are you sure?') },
+                class: 'btn btn-danger btn-xs' %>
         <% else %>
-          <%= link_to "Why can not I delete this knowledge area?",
-                competence_matrix_knowledge_area_users_path(@competence_matrix, knowledge_area) %>
+          <%= t('destroy.cannot_be_deleted', default: "Cannot delete this %{model}.", model: t('matrices.knowledge_areas.knowledge_area', default: "knowledge_area")) %> <%= link_to t('destroy.see_why', default: "See why."),
+            competence_matrix_knowledge_area_users_path(@competence_matrix, knowledge_area) %>
         <% end %></td>
       </tr>
     <% end %>
@@ -36,24 +36,24 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="3"><%= Ability.model_name.human.pluralize.titleize %></th>
+      <th colspan="3"><%= t('matrices.abilities.abilities', default: "abilities").titleize %></th>
     </tr>
   </thead>
   <tbody>
     <% @competence_matrix.abilities.each do |ability| %>
       <tr>
         <td><%= ability.name %></td>
-        <td><%= link_to t('.edit', :default => "Edit competence values"),
-                      edit_competence_matrix_ability_path(@competence_matrix, ability), :class => 'btn btn-default btn-xs' %>
+        <td><%= link_to t('helpers.titles.edit', default: "Edit ${model}", model: t('competences.values.competence_values', default: "competence values")),
+                      edit_competence_matrix_ability_path(@competence_matrix, ability), class: 'btn btn-default btn-xs' %>
         <% if destroy? ability %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <%= link_to t('helpers.links.destroy', default: "Delete"),
                   competence_matrix_destroy_ability_path(@competence_matrix, ability),
-                  :method => 'delete',
-                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :key => "value", :default => 'Are you sure?')) },
-                  :class => 'btn btn-danger btn-xs' %></td>
+                  method: 'delete',
+                  data: { confirm: t('helpers.links.confirm', key: "value", default: 'Are you sure?') },
+                  class: 'btn btn-danger btn-xs' %></td>
         <% else %>
-          <%= link_to "Why can not I delete this ability?",
-                competence_matrix_ability_users_path(@competence_matrix, ability) %>
+          <%= t('destroy.cannot_be_deleted', default: "Cannot delete this %{model}.", model: t('matrices.abilities.ability', default: "ability")) %> <%= link_to t('destroy.see_why', default: "See why."),
+              competence_matrix_ability_users_path(@competence_matrix, ability) %>
         <% end %>
       </tr>
     <% end %>
@@ -63,11 +63,11 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="3">Competence values</th>
+      <th colspan="3"><%= t('competences.values.competence_values', default: "competence values").titleize %></th>
     </tr>
     <tr>
-      <th>Competence value</th>
-      <th>Rank</th>
+      <th><%= t('competences.values.competence_values', default: "competence values").titleize %></th>
+      <th><%= t('competences.values.rank', default: "rank").titleize %></th>
       <th></th>
     </tr>
   </thead>
@@ -78,13 +78,13 @@
         <td><%= value.rank %></td>
         <td>
           <% if destroy? value %>
-            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+            <%= link_to t('helpers.links.destroy', default: "Delete"),
                 competence_matrix_destroy_value_path(@competence_matrix, value),
-                :method => 'delete',
-                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :key => "value", :default => 'Are you sure?')) },
-                :class => 'btn btn-danger btn-xs' %></td>
+                method: 'delete',
+                data: { confirm: t("helpers.links.confirm", key: "value", default: 'Are you sure?') },
+                class: 'btn btn-danger btn-xs' %></td>
           <% else %>
-            <%= link_to "Why can not I delete this competence value?",
+            <%= t('destroy.cannot_be_deleted', default: "Cannot delete this %{model}.", model: t('competences.values.competence_value', default: "competence value")) %> <%= link_to t('destroy.see_why', default: "See why."),
                 competence_matrix_value_users_path(@competence_matrix, value) %>
           <% end %>
       </tr>
@@ -92,21 +92,20 @@
   </tbody>
 </table>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              :back, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_competence_matrix_path(@competence_matrix), :class => 'btn btn-default' %>
+<%= link_to t('helpers.links.back', default: "Back"),
+              :back, class: 'btn btn-default'  %>
+<%= link_to t('helpers.links.edit', default: "Edit"),
+              edit_competence_matrix_path(@competence_matrix), class: 'btn btn-default' %>
 <% if destroy? @competence_matrix %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+  <%= link_to t('helpers.links.destroy', default: "delete"),
                 competence_matrix_path(@competence_matrix),
-                :method => 'delete',
-                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :key => "value", default => 'Are you sure?')) },
-                :class => 'btn btn-danger' %>
+                method: 'delete',
+                data: { confirm: t("helpers.links.confirm", key: "value", default: 'Are you sure?') },
+                class: 'btn btn-danger' %>
 <% else %>
   <br/>
   <br/>
-  <%= link_to "Why can not I delete this competence matrix?",
-                competence_matrix_users_path(@competence_matrix) %>
+  <%= t('destroy.cannot_be_deleted', default: "Cannot delete this %{model}.", model: t('matrices.matrix', default: "matrix")) %> <%= link_to t('destroy.see_why', default: "See why."), competence_matrix_users_path(@competence_matrix) %>
   <br/>
   <br/>
 <% end %>

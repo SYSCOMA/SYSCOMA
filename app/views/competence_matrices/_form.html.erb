@@ -1,9 +1,9 @@
-<%= form_for @competence_matrix, :html => { :class => "form-horizontal competence_matrix" } do |f| %>
+<%= form_for @competence_matrix, html: { class: "form-horizontal competence_matrix" } do |f| %>
 
     <% if @competence_matrix.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@competence_matrix.errors.count, "error") %> prohibited this competence_matrix from being saved:</h3>
+        <h3 class="panel-title"><%= t('errors.messages.not_saved', default: pluralize(@competence_matrix.errors.count, "error").concat(" prohibited this %{resource} from being saved:"), count: @competence_matrix.errors.count.to_s, resource: t('matrices.matrix', default: 'matrix')) %></h3>
       </div>
       <div class="panel-body">
         <ul>
@@ -16,30 +16,29 @@
   <% end %>
 
   <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
+    <%= f.label t('matrices.name', default: "name"), class: 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'form-control' %>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
     <%= error_span(@competence_matrix[:name]) %>
   </div>
-  <div id='empty-spaces-loader'></div>
 
   <table class="table table-striped">
     <thead>
       <tr>
-        <th><%= KnowledgeArea.model_name.human.pluralize %></th>
+        <th><%= t('matrices.knowledge_areas.knowledge_areas', default: "Knowledge Areas").titleize %></th>
       </tr>
     </thead>
     <tbody id="knowledge-areas">
       <%= f.fields_for :knowledge_areas do |ff| %>
         <tr>
           <td>
-            <div class="controls"><%= ff.text_field :name, :class => 'form-control' %></div>
+            <div class="controls"><%= ff.text_field :name, class: 'form-control' %></div>
           </td>
         </tr>
       <% end %>
       <tr>
-        <td><%= f.submit "Add knowledge area", :class => 'btn btn-default' %></td>
+        <td><%= f.submit t('model.add', default: "Add %{model}", model: t('matrices.knowledge_areas.knowledge_area', default: "knowledge area")), class: 'btn btn-default' %></td>
       </tr>
     </tbody>
   </table>
@@ -49,19 +48,19 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th><%= Ability.model_name.human.pluralize %></th>
+        <th><%= t('matrices.abilities.abilities', default: "abilities").titleize %></th>
       </tr>
     </thead>
     <tbody id="abilities">
       <%= f.fields_for :abilities do |ff| %>
         <tr>
           <td>
-            <div class="controls"><%= ff.text_field :name, :class => 'form-control' %></div>
+            <div class="controls"><%= ff.text_field :name, class: 'form-control' %></div>
           </td>
         </tr>
       <% end %>
       <tr>
-        <td><%= f.submit "Add ability", :class => 'btn btn-default' %></td>
+        <td><%= f.submit t('model.add', default: "Add %{model}", model: t('matrices.abilities.ability', default: "ability")), class: 'btn btn-default' %></td>
       </tr>
     </tbody>
   </table>
@@ -70,32 +69,32 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th colspan="2">Competence <%= Value.model_name.human.pluralize %></th>        
+        <th colspan="2"><%= t('competences.values.competence_values', default: "competence values").titleize %></th>        
       </tr>
       <tr>
-        <th>Competence value</th>
-        <th>Rank</th>
+        <th><%= t('competences.values.competence_value', default: "competence value").titleize %></th>
+        <th><%= t('competences.values.rank', default: "rank").titleize %></th>
       </tr>
     </thead>
     <tbody id="values">
       <%= f.fields_for :values do |ff| %>
         <tr>
           <td>
-            <div class="controls"><%= ff.text_field :value, :class => 'form-control' %></div>
+            <div class="controls"><%= ff.text_field :value, class: 'form-control' %></div>
           </td>
           <td>
-            <div class="controls"><%= ff.text_field :rank, :class => 'form-control' %></div>
+            <div class="controls"><%= ff.text_field :rank, class: 'form-control' %></div>
           </td>
         </tr>
       <% end %>
       <tr>
-        <td colspan="2"><%= f.submit "Add value", :class => 'btn btn-default' %></td>
+        <td colspan="2"><%= f.submit t('model.add', default: "Add %{model}", model: t('competences.values.value', default: "value")), class: 'btn btn-default' %></td>
       </tr>
     </tbody>
   </table>
   <%= error_span(@competence_matrix[:values]) %>
 
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            :back, :class => 'btn btn-default' %>
+  <%= f.submit t('helpers.titles.save', default: "Save %{model}", model: t("matrices.matrix", default: "matrix")), class: 'btn btn-primary' %>
+  <%= link_to t('helpers.links.cancel', default: "Cancel"),
+            :back, class: 'btn btn-default' %>
 <% end %>

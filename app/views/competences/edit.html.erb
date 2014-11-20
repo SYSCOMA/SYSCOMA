@@ -1,18 +1,18 @@
 <%- model_class = Competence -%>
 <div class="page-header">
-  <h1><%=t '.title', default: [:'helpers.titles.edit', 'Fill Competences'], model: model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%= t('competences.fill_competences', default: 'Fill Competences').titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong>Person:</strong></dt>
+  <dt><strong><%= t('users.user', default: "user").titleize %>:</strong></dt>
   <dd><%= @user.name %></dd>
 </dl>
 <dl class="dl-horizontal">
-  <dt><strong><%= CompetenceMatrix.model_name.human.titleize %>:</strong></dt>
+  <dt><strong><%= t('matrices.competence_matrix', default: "competence matrix").titleize %>:</strong></dt>
   <dd><%= @competence_matrix.name %></dd>
 </dl>
 <dl class="dl-horizontal">
-  <dt><strong><%= KnowledgeArea.model_name.human.titleize %>:</strong></dt>
+  <dt><strong><%= t('matrices.knowledge_areas.knowledge_area', default: "knowledge area").titleize %>:</strong></dt>
   <dd><%= @knowledge_area.name %></dd>
 </dl>
 
@@ -20,8 +20,8 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th><%= Ability.model_name.human %></th>
-        <th>Competence value</th>
+        <th><%= t('matrices.abilities.ability', default: "ability").titleize %></th>
+        <th><%= t('competences.values.competence_value', default: "competence value").titleize %></th>
       </tr>
     </thead>
     <tbody>
@@ -33,14 +33,14 @@
             <%= f.hidden_field :ability_id, value: competence.ability.id %>
             <%= f.hidden_field :user_id, value: @user.id %>
             <td><%= competence.ability.name %></td>
-            <td><%= f.collection_select :value_id, collection_for_select_value(competence.ability), :id, :value, { include_blank: "None" }, { selected: competence.value_id } %></td>
+            <td><%= f.collection_select :value_id, collection_for_select_value(competence.ability), :id, :value, { include_blank: t('competences.values.none', default: "None") }, { selected: competence.value_id } %></td>
           <% end %>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <%= submit_tag "Save", :class => 'btn btn-primary' %>
+  <%= submit_tag t('helpers.links.save', default: "Save"), class: 'btn btn-primary' %>
   
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-            :back, :class => 'btn btn-default' %>
+  <%= link_to t('helpers.links.back', default: "Back"),
+            :back, class: 'btn btn-default' %>
 <% end %>

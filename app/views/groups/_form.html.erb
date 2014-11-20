@@ -1,9 +1,9 @@
-<%= form_for @group, :html => { :class => "form-horizontal group" } do |f| %>
+<%= form_for @group, html: { class: "form-horizontal group" } do |f| %>
 
     <% if @group.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h3>
+        <h3 class="panel-title"><%= t('errors.messages.not_saved', default: pluralize(@group.errors.count, "error").concat(" prohibited this %{resource} from being saved:"), count: @group.errors.count.to_s, resource: t('matrices.matrix', default: 'matrix')) %></h3>
       </div>
       <div class="panel-body">
         <ul>
@@ -18,15 +18,15 @@
   <%= f.hidden_field :subgroup_of_id %>
 
   <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
+    <%= f.label t('groups.name', default: "name"), class: 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'form-control' %>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
     <%= error_span(@group[:name]) %>
   </div>
   <div id='empty-spaces-loader'></div>
 
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            :back, :class => 'btn btn-default' %>
+  <%= f.submit t('helpers.links.save', default: "Save"), class: 'btn btn-primary' %>
+  <%= link_to t('helpers.links.cancel', default: "Cancel"),
+            :back, class: 'btn btn-default' %>
 <% end %>

@@ -1,15 +1,15 @@
-<h2>Log in</h2>
+<h2><%= t('devise.custom.log_in', default: "log in").humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field control-group">
-    <%= f.label :email %><br />
+    <%= f.label t('users.email', default: "email") %><br />
     <div class="controls">
       <%= f.email_field :email, autofocus: true %>
     </div>
   </div>
 
   <div class="field control-group">
-    <%= f.label :password %><br />
+    <%= f.label t('users.password.password', default: "password") %><br />
     <div class="controls">
       <%= f.password_field :password, autocomplete: "off" %>
     </div>
@@ -23,7 +23,7 @@
   <% end -%>
 
   <div class="actions">
-    <%= f.submit "Log in", :class => 'btn btn-primary' %>
+    <%= f.submit t('devise.custom.log_in', default: "log in").humanize, class: 'btn btn-primary' %>
   </div>
 <% end %>
 

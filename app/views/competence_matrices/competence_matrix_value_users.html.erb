@@ -1,19 +1,19 @@
 <%- model_class = CompetenceMatrix -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%=t('matrices.competence_matrix', default: "competence matrix").titleize %></h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong>Competence matrix:</strong></dt>
+  <dt><strong><%=t('matrices.competence_matrix', default: "competence matrix").titleize %>:</strong></dt>
   <dd><%= @competence_matrix.name %></dd>
 </dl>
 
 <dl class="dl-horizontal">
-  <dt><strong>Competence value:</strong></dt>
+  <dt><strong><%=t('competences.values.competence_value', default: "competence value").titleize %>:</strong></dt>
   <dd><%= @value.value %></dd>
 </dl>
 
-<%= render :partial => 'users', locals: { users: @users, filled_model: "in this value" } %>
+<%= render partial: 'users', locals: { users: @users, filled_model: t("competences.values.competence_value", default: "competence value") } %>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              :back, :class => 'btn btn-default'  %>
+<%= link_to t('helpers.links.back', default: "Back"),
+              :back, class: 'btn btn-default'  %>

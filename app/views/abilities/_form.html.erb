@@ -1,21 +1,21 @@
 <dl class="dl-horizontal">
-  <dt><strong>Competence Matrix:</strong></dt>
+  <dt><strong><%= t('matrices.competence_matrix', default: "Competence matrix").titleize %>:</strong></dt>
   <dd><%= @competence_matrix.name %></dd>
 </dl>
 
 <dl class="dl-horizontal">
-  <dt><strong>Ability:</strong></dt>
+  <dt><strong><%= t('matrices.abilities.ability', default: "ability").titleize %>:</strong></dt>
   <dd><%= @ability.name %></dd>
 </dl>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="3">Competence <%= Value.model_name.human.pluralize %></th>        
+      <th colspan="3"><%= t('competeces.values.competence_values', default: "competence values").titleize %></th>        
     </tr>
     <tr>
-      <th>Competence value</th>
-      <th>Rank</th>
+      <th><%= t('competeces.values.competence_value', default: "competence value").titleize %></th>
+      <th><%= t('competeces.values.rank', default: "rank").titleize %></th>
       <th></th>
     </tr>
   </thead>
@@ -27,10 +27,10 @@
           <tr>
             <%= render partial: 'value_form_fields', locals: { f: f } %>
             <td>
-              <%= f.submit "Save", :class => 'btn btn-primary' %>
-              <%= f.submit "Delete", 
-                    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :key => "value", :default => 'Are you sure?')) },
-                    :class => 'btn btn-danger' %>
+              <%= f.submit t("helpers.links.save", default: "Save"), class: 'btn btn-primary' %>
+              <%= f.submit t("helpers.links.destroy", default: "Delete"), 
+                    data: { confirm: t('helpers.links.confirm', key: "value", default: 'Are you sure?') },
+                    class: 'btn btn-danger' %>
             </td>
           </tr>
         <% end %>
@@ -43,7 +43,7 @@
             <%= value.rank %>
           </td>
           <td>
-            <%= link_to "Why can not I delete this value?",
+            <%= t('destroy.cannot_be_destroyed', default: 'Cannot delete this %{model}.', model: 'value') %> <%= link_to t('destroy.see_why', default: "See why."),
                 competence_matrix_ability_value_users_path(@competence_matrix, @ability, value) %>
           </td>
         </tr>
@@ -53,7 +53,7 @@
       <tr>
         <%= render partial: 'value_form_fields', locals: { f: f } %>
         <td>
-          <%= f.submit "Save", :class => 'btn btn-primary' %>
+          <%= f.submit t('helpers.links.save', default: "Save"), class: 'btn btn-primary' %>
         </td>
       </tr>
     <% end %>
@@ -61,5 +61,5 @@
 </table>
 <%= error_span(@ability[:values]) %>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-          :back, :class => 'btn btn-default' %>
+<%= link_to t("helpers.links.back", default: "Back"),
+          :back, class: 'btn btn-default' %>

@@ -1,7 +1,7 @@
 <% if @user.errors.any? %>
   <div id="error_expl" class="panel panel-danger">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+      <h3 class="panel-title"><%= t('errors.messages.not_saved', default: pluralize(@user.errors.count, "error").concat(" prohibited this user from being saved:"), count: @user.errors.count.to_s, resource: t('users.user', default: 'user')) %></h3>
     </div>
     <div class="panel-body">
       <ul>
@@ -14,45 +14,42 @@
 <% end %>
 
 <div class="control-group field">
-  <%= f.label :name %><br />
+  <%= f.label t('users.name', default: "name") %><br />
   <div class="controls">
     <%= f.text_field :name, autofocus: true %>
   </div>
 </div>
 
 <div class="control-group field">
-  <%= f.label :email %><br />
+  <%= f.label t('users.email', default: "email") %><br />
   <div class="controls">
     <%= f.email_field :email, autofocus: true %>
   </div>
 </div>
 
 <div class="control-group field">
-  <strong>Password</strong> (minimum 8 characters)
-  <% if @validatable %>
-  <em>(<%= @minimum_password_length %> characters minimum)</em>
-  <% end %><br />
+  <%= f.label t('users.password.password', default: "password") %> <em>(<%= t('users.password.minimum', default: "minimum %{lenght} characters", lenght: "8") %>)</em>
   <div class="controls">
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
 </div>
 
 <div class="control-group field">
-  <%= f.label :password_confirmation %><br />
+  <%= f.label t('users.password.confirmation', default: "password confirmation") %><br />
   <div class="controls">
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 </div>
 
 <div class="control-group field">
-  <%= f.label :admin %><br />
+  <%= f.label t('users.admin', default: "admin") %><br />
   <div class="controls">
     <%= f.check_box :admin %>
   </div>
 </div>
 
 <div class="actions">
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          :back, :class => 'btn btn-default' %>
+  <%= f.submit t('helpers.titles.save', default: "Save %{model}", model: t('users.user', default: 'user')), class: 'btn btn-primary' %>
+  <%= link_to t('helpers.links.cancel', default: "Cancel"),
+          :back, class: 'btn btn-default' %>
 </div>

@@ -1,7 +1,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>The follwing users had filled up some competence <%= filled_model %></th>
+      <th><%= t('users.filled_list', default: "The follwing %{users} had fill up some %{competences} with this %{model}.", users: t('users.users', default: 'users'), competences: t('competences.competences', default: "competences"), model: filled_model)%></th>
     </tr>
   </thead>
   
