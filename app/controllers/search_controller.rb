@@ -150,28 +150,56 @@ class SearchController < ApplicationController
     end
 
     #do the query
+    #the "<" and "<= should be optimized"
     def process_criterium split
+      users = []
       case split.third
-      when "<" then competences_result = Competence.joins(:value).
-        where("knowledge_area_id = ? AND competences.ability_id = ? AND rank < ?",
-        split.first, split.second, split.fourth)
-      when ">" then competences_result = Competence.joins(:value).
-        where("knowledge_area_id = ? AND competences.ability_id = ? AND rank > ?",
-        split.first, split.second, split.fourth)
-      when "<=" then competences_result = Competence.joins(:value).
-        where("knowledge_area_id = ? AND competences.ability_id = ? AND rank <= ?",
-        split.first, split.second, split.fourth)
-      when ">=" then competences_result = Competence.joins(:value).
-        where("knowledge_area_id = ? AND competences.ability_id = ? AND rank >= ?",
-        split.first, split.second, split.fourth)
-      when "=" then competences_result = Competence.joins(:value).
-        where("knowledge_area_id = ? AND competences.ability_id = ? AND rank = ?",
-        split.first, split.second, split.fourth)
+      when "<" then 
+        competences_result = Competence.joins(:value).joins(:user).
+          where("knowledge_area_id = ? AND competences.ability_id = ?",
+          split.first, split.second)
+        filled = competences_result.collect { |competence| competence.user }
+        User.find_each do |user|
+          if filled.exclude? user
+            users << user
+          end
+        end
+
+        competences_result = competences_result.select do |competence|
+          competence.value.rank < split.fourth.to_i
+        end
+      when ">" then 
+        competences_result = Competence.joins(:value).
+          where("knowledge_area_id = ? AND competences.ability_id = ? AND rank > ?",
+          split.first, split.second, split.fourth)
+      when "<=" then 
+        competences_result = Competence.joins(:value).joins(:user).
+          where("knowledge_area_id = ? AND competences.ability_id = ?",
+          split.first, split.second)
+
+        filled = competences_result.collect { |competence| competence.user }
+        User.find_each do |user|
+          if filled.exclude? user
+            users << user
+          end
+        end
+
+        competences_result = competences_result.select do |competence|
+          competence.value.rank <= split.fourth.to_i
+        end
+      when ">=" then 
+        competences_result = Competence.joins(:value).
+          where("knowledge_area_id = ? AND competences.ability_id = ? AND rank >= ?",
+          split.first, split.second, split.fourth)
+      else # when "=" then 
+        competences_result = Competence.joins(:value).
+          where("knowledge_area_id = ? AND competences.ability_id = ? AND rank = ?",
+          split.first, split.second, split.fourth)
       end
 
       #selecting first the users ids to do less accesses to the database
       users_ids = competences_result.collect { |competence| competence.user_id }
-      users_ids.uniq
-      users = users_ids.collect { |id| User.find(id) }
+      users_ids.uniq!
+      users += users_ids.collect { |id| User.find(id) }
     end
 end

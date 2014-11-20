@@ -8,7 +8,11 @@ class SearchCriteria < ActiveRecord::Base
   belongs_to :user
 
   def formula
-    process_search_criteria composition
+    if composition.present?
+      process_search_criteria composition
+    else
+      ""
+    end
   end
 
   private
