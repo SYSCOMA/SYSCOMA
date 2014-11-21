@@ -14,11 +14,12 @@ class AbilitiesController < ApplicationController
 
   def update
     value = Value.find(params[:id])
-    if params[:commit]=="Delete"
+    if params[:commit] == t("helpers.links.destroy", default: "Delete")
       value.destroy
     else
       value.update(value_params)
     end
+    @ability.reload
     redirect_to edit_competence_matrix_ability_path(@competence_matrix, @ability)
   end
 
@@ -43,7 +44,7 @@ class AbilitiesController < ApplicationController
     end
 
     def value_params
-      params.require(:value).permit(:value, :rank, :ability_id)
+      params.require(:value).permit(:id, :value, :rank, :ability_id)
     end
     
     def authenticate_admin_user

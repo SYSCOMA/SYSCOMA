@@ -78,7 +78,7 @@ class UsersController < ApplicationController
       @competences = (Competence.where user: @user).to_a
 
       #competence.competence_matrix should through a "through relationship"
-      @competences.select! { |competence| competence.ability.competence_matrix == @competence_matrix }
+      @competences.select! { |competence| competence.ability.competence_matrix_id == @competence_matrix.id }
 
       @competences.sort_by! { |competence| competence.ability.name }
     end

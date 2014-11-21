@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "SYSCOMA" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : t('syscoma', default: "Syscoma") %></title>
 
     <link type="text/plain" rel="author" href="humans.txt" />
     <%= javascript_include_tag :modernizr %>
@@ -59,7 +59,7 @@
               <%= link_to t('devise.custom.logout', default: "logout").titleize, destroy_user_session_path, method: :delete, class: 'navbar-link'  %>
             <% else %>
               <%= #link_to "Sign up", new_user_registration_path, class: 'navbar-link'
-                %> <!--| TODO Registration process should be configurable by the administer-->
+                %> <!--| TODO Registration process should be configurable by the system admin -->
               <%= link_to t('devise.custom.login', default: "login").titleize, new_user_session_path, class: 'navbar-link'  %>
             <% end %>
           </ul>

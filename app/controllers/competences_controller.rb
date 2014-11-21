@@ -60,22 +60,17 @@ class CompetencesController < ApplicationController
     end
 
     def save_competence params
-      if params[:id].empty? && params[:value_id] != nil &&
-          params[:value_id] != 0 && params[:value_id] != ""
-        params = params.permit(:knowledge_area_id, :ability_id, :user_id, :value_id)
+      params = params.permit(:id, :knowledge_area_id, :ability_id, :user_id, :value_id)
+      if params[:id].present?
+        competence = Competence.find(params[:id])
+        if params[:value_id].empty?
+          competence.destroy
+        else
+          competence.update(params)
+        end
+      elsif params[:value_id].present?
         competence = Competence.new(params)
         competence.save
-      elsif params[:value_id] == nil
-        Competence.find(params[:id]).destroy
-      else
-        params = params.permit(:id, :knowledge_area_id, :ability_id, :user_id, :value_id)
-        #raise params.inspect
-        if params[:id].present?
-          Competence.find(params[:id]).update(params)
-        else
-          competence = Competence.new params
-          competence.save
-        end
       end
     end
 end

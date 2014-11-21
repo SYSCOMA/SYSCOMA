@@ -20,7 +20,7 @@ class CompetenceMatricesController < ApplicationController
 
   def create
     @competence_matrix = CompetenceMatrix.new(competence_matrix_params)
-    if params[:commit] == "Create Competence matrix"
+    if params[:commit] == t('helpers.titles.save', default: "Save %{model}", model: t("matrices.matrix", default: "matrix"))
       if @competence_matrix.save
         redirect_to competence_matrix_path(@competence_matrix)
       else 
@@ -33,7 +33,7 @@ class CompetenceMatricesController < ApplicationController
   end
 
   def update
-    if params[:commit] == "Update Competence matrix"
+    if params[:commit] == t('helpers.titles.save', default: "Save %{model}", model: t("matrices.matrix", default: "matrix"))
       if @competence_matrix.update(competence_matrix_params)
         redirect_to competence_matrix_path(@competence_matrix)
       else
@@ -117,9 +117,9 @@ class CompetenceMatricesController < ApplicationController
     end
 
     def handle_commit
-      if params[:commit] == "Add ability"
+      if params[:commit] == t('model.add', default: "Add %{model}", model: t('matrices.abilities.ability', default: "ability"))
         @competence_matrix.abilities.build
-      elsif params[:commit] == "Add knowledge area"
+      elsif params[:commit] == t('model.add', default: "Add %{model}", model: t('matrices.knowledge_areas.knowledge_area', default: "knowledge area"))
         @competence_matrix.knowledge_areas.build
       else
         @competence_matrix.values.build
