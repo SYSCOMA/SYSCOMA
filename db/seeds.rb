@@ -6,5 +6,3 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.create(admin: true, name: 'AdminUser', password: 'adminadmin', password_confirmation: 'adminadmin', email: 'admin@admin.com')
-
-CompetenceMatrix.create(name: 'Languages')

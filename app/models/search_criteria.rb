@@ -4,7 +4,6 @@ class SearchCriteria < ActiveRecord::Base
       uniqueness: true
   validates :composition, presence: true
 
-  has_many :criteria, dependent: :destroy
   belongs_to :scope, class_name: 'Group'
   belongs_to :user
 

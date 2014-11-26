@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119144355) do
+ActiveRecord::Schema.define(version: 20141126185000) do
 
   create_table "abilities", force: true do |t|
     t.string   "name"
@@ -41,16 +41,6 @@ ActiveRecord::Schema.define(version: 20141119144355) do
   add_index "competences", ["knowledge_area_id"], name: "index_competences_on_knowledge_area_id"
   add_index "competences", ["user_id"], name: "index_competences_on_user_id"
   add_index "competences", ["value_id"], name: "index_competences_on_value_id"
-
-  create_table "criteria", force: true do |t|
-    t.integer  "search_criteria_id"
-    t.string   "comparative"
-    t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "criteria", ["search_criteria_id"], name: "index_criteria_on_search_criteria_id"
 
   create_table "groups", force: true do |t|
     t.string   "name"
