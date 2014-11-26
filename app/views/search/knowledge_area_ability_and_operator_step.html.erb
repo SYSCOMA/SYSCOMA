@@ -9,7 +9,7 @@
 <div class="row">
   <div class="col-lg-8">
     <div class="well">
-      <h3><%= t('searches.add_new_criterium', default: "Add new criterium" %></h3>
+      <h3><%= t('searches.add_new_criterium', default: "Add new criterium") %></h3>
 
       <%= form_for @search_criteria, url: search_value_step_path, method: :post, html: { class: "form-horizontal search" } do |f|%>
         <%= render partial: 'hidden_fields', locals: { f: f } %>

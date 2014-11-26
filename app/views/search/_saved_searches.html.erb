@@ -10,7 +10,7 @@
               <% if @search_criteria.composition.present? %>
                 <%= select_tag :conective, options_for_select(conectives) %>
               <% end %>
-              <%= select_tag :saved_id, options_from_collection_for_select(@saved_searches, :id, :name, @saved_search) %>
+              <%= select_tag :saved_id, options_from_collection_for_select(@saved_searches, :id, :name, @saved_search.id) %>
               <%= submit_tag t('searches.see', default: "See"), :class => 'btn btn-primary btn-xs' %>
               <%= submit_tag t('searches.add', default: "Add"), :class => 'btn btn-primary btn-xs' %>
             </dd>
