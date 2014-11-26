@@ -3,9 +3,14 @@
   <h1><%= t('searches.search', default: "search").titleize %></h1>
 </div>
 
+<%= render partial: 'formula' %>
+<br/>
+
 <div class="row">
   <div class="col-lg-8">
     <div class="well">
+      <h3><%= t('searches.add_new_criterium', default: "Add new criterium" %></h3>
+
       <%= form_for @search_criteria, url: search_knowledge_area_ability_and_operator_step_path, method: :post, html: { class: "form-horizontal search" } do |f|%>
         <%= render partial: 'hidden_fields', locals: { f: f } %>
         <%= render partial: "scope", locals: { f: f } %>
@@ -28,4 +33,3 @@
 </div>
 
 <%= render partial: 'saved_searches' %>
-<%= render partial: 'formula' %>
