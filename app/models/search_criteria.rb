@@ -1,7 +1,8 @@
 class SearchCriteria < ActiveRecord::Base
   validates :name, presence: true, 
-      length: { minimum: 1 }, 
+      length: { minimum: 2 }, 
       uniqueness: true
+  validates :composition, presence: true
 
   has_many :criteria, dependent: :destroy
   belongs_to :scope, class_name: 'Group'
