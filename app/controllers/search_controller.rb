@@ -1,6 +1,7 @@
 class SearchController < ApplicationController
   before_action :authenticate_user!
   before_action :set_saved_searches, except: [:search]
+  before_action :set_empty_saved_search, except: [:add_saved, :search]
   before_action :set_scope_array, except: [:search]
   before_action :set_search_criteria, except: [:new]
 
@@ -74,6 +75,10 @@ class SearchController < ApplicationController
   private
     def set_saved_searches
       @saved_searches = SearchCriteria.where(user_id: current_user.id)
+    end
+
+    def set_empty_saved_search
+      @saved_search = SearchCriteria.new
     end
 
     def set_scope_array
