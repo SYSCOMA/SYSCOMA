@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.7'
+gem 'rails', '4.2.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 4.0.4'
+gem 'sass-rails', '>= 5.0.1'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 2.5.3'
+gem 'uglifier', '>= 2.6.1'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '>= 4.1.0'
@@ -28,13 +28,14 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '>= 2.2.4'
+gem 'jbuilder', '>= 2.2.6'
 
 # Host CommonJS JavaScript environments in Ruby
 #gem 'commonjs', '0.2.7'
 
 # For user authentication and everything else
 gem 'devise', '~> 3.4.1'
+gem 'responders', '~> 2.0.2'
 
 # PostgreSQL integration
 gem "pg", "~> 0.17.1"
@@ -44,7 +45,7 @@ gem "pg", "~> 0.17.1"
 gem "twitter-bootstrap-rails"
 
 # JQueryUI
-gem 'jquery-ui-rails', '~> 5.0.2'
+gem 'jquery-ui-rails', '~> 5.0.3'
 
 # InPlace editing
 gem 'rest_in_place'
@@ -80,7 +81,7 @@ group :development, :test do
   gem "konacha", "~> 3.3.0"
   
   #deployment
-  gem 'capistrano', "~>3.2.1", require: false
+  gem 'capistrano', "~>3.3.5", require: false
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'capistrano-rvm', "~>0.1.2"
@@ -95,7 +96,7 @@ end
 
 # Acceptance tests
 group :cucumber do
-  gem 'cucumber', '~> 1.3.17'
+  gem 'cucumber', '~> 1.3.18'
   gem 'cucumber-rails'
   gem 'poltergeist', '~> 1.5.1'
 end
