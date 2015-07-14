@@ -20,7 +20,6 @@
     <div class="controls">
       <%= f.text_field :name, class: 'form-control' %>
     </div>
-    <%= error_span(@competence_matrix[:name]) %>
   </div>
 
   <table class="table table-striped">
@@ -42,8 +41,6 @@
       </tr>
     </tbody>
   </table>
-  <%= error_span(@competence_matrix[:knowledge_areas]) %>
-
 
   <table class="table table-striped">
     <thead>
@@ -64,12 +61,11 @@
       </tr>
     </tbody>
   </table>
-  <%= error_span(@competence_matrix[:abilities]) %>
 
   <table class="table table-striped">
     <thead>
       <tr>
-        <th colspan="2"><%= t('competences.values.competence_values', default: "competence values").titleize %></th>        
+        <th colspan="2"><%= t('competences.values.competence_values', default: "competence values").titleize %></th>
       </tr>
       <tr>
         <th><%= t('competences.values.competence_value', default: "competence value").titleize %></th>
@@ -92,7 +88,6 @@
       </tr>
     </tbody>
   </table>
-  <%= error_span(@competence_matrix[:values]) %>
 
   <%= f.submit t('helpers.titles.save', default: "Save %{model}", model: t("matrices.matrix", default: "matrix")), class: 'btn btn-primary' %>
   <%= link_to t('helpers.links.cancel', default: "Cancel"),
